@@ -1,8 +1,56 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding: 0px;
+    Margin: 0px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+.trvlrRedBg {
+    background-color: #E34728;
+}
+
+.whiteSmokeText{
+    color: whitesmoke;
+}
+.whiteSmokeBg{
+    background-color: whitesmoke;
+}
+.liveStatus {
+    padding-top: 80px;
+    padding-right: 60px;
+    font-size: 16px;
+}
+
+.logo {
+    height: 100px;
+    width: 100px;
+}
+
+.introText {
+    font-size: 85px;
+
+    color: #585858;
+    padding-top: 50px;
+}
+
+.introTextBg {
+    background-color: #E5E6E1;
+}
+
+.bluebg {
+    background-color: #486FB5;
+}
+
+.btnRow {
+    padding-top: 60px;
+    padding-bottom: 80px;
+}
+
+.brdr {
+    border: solid 1px red;
+}
+
+.boardingAtFont{
+    padding-top: 10px;
+    color: #E34728;
+    font-weight: bold;
 }
