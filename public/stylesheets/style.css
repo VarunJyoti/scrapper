@@ -71,6 +71,23 @@ body {
     border-radius: 0px 0px 10px 10px;
     text-align: center;
 }
+
+.cancelledStatus-bottom {
+    font-size: 10px;
+    background-color: #486FB5;
+    color: white;
+    padding: 10px 50px 10px 50px;
+    border-radius: 0px 0px 10px 10px;
+    text-align: center;
+}
+
+.cancelledList {
+    font-size: 12px;
+    height: 350px;
+    overflow-y: scroll;
+    padding:10px;
+    text-align: left;
+}
 .input {
     margin-top: 20px;
     padding: 0px 50px 0px 50px;
