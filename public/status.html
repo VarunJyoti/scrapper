@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trvlr</title>
+    <script type="text/javascript" src="js/knockout-3.4.1.js"></script>
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="./js/sammy.js"></script>
+    
+    
+    <script type="text/javascript" src="./js/status_app.js"></script>
+    <link rel="stylesheet" type="text/css" href="./stylesheets/bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./stylesheets/style.css">
+    <script type="text/javascript" src="./stylesheets/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body id="root">
+<ul class="nav nav-pills" data-bind="foreach:views">
+    <li data-bind="css: {active: $root.currentView() == $data}"> 
+        <a  data-bind="text:$data, attr:{href:'#' + $data}"></a>
+    </li>
+</ul>
+
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <div data-bind="template: {name: currentView()}"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="Running">
+    <div>
+    <h2>Running</h2>
+    </div>
+</script>
+<script type="text/html" id="PNR">
+    <div>
+    <h2>PNR</h2>    
+    </div>
+</script>
+<script type="text/html" id="Cancelled">
+     <div>
+    <h2>Cancelled</h2>
+    </div>
+</script>
+</body>
+</html>
