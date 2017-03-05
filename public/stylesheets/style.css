@@ -54,3 +54,24 @@ body {
     color: #E34728;
     font-weight: bold;
 }
+
+.runningStatus-top {
+    font-size: 18px;
+    background-color: #486FB5;
+    color: white;
+    padding: 20px 50px 20px 50px;
+    border-radius: 10px 10px 0px 0px;
+    text-align: center;
+}
+.runningStatus-bottom {
+    font-size: 18px;
+    background-color: #486FB5;
+    color: white;
+    padding: 20px 50px 20px 50px;
+    border-radius: 0px 0px 10px 10px;
+    text-align: center;
+}
+.input {
+    margin-top: 20px;
+    padding: 0px 50px 0px 50px;
+}
