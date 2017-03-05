@@ -6,17 +6,48 @@ body {
 
 .trvlrRedBg {
     background-color: #E34728;
+    padding: 20px;
+    border-radius: 10px 10px 0px 0px;
 }
 
-.whiteSmokeText{
+.whiteSmokeText {
     color: whitesmoke;
 }
-.whiteSmokeBg{
+
+.mobilSection {
+    padding: 6.5%;
+    border: solid 1px black;
+    border-radius: 10px;
+}
+
+.mobilHeader {
+    color: whitesmoke;
+    background-color: #486FB5;
+    text-align: center;
+    padding: 2%;
+}
+
+.mobilBgImage {
+    background-image: url("../images/train_line.png")
+}
+
+.selectTrain {
+    margin-top: 88%;
+    color: whitesmoke;
+    background-color: #E34728;
+    padding: 3% 0;
+}
+
+.emptyRow {
+    padding: 5% 0;
+}
+
+.whiteSmokeBg {
     background-color: whitesmoke;
 }
+
 .liveStatus {
-    padding-top: 80px;
-    padding-right: 60px;
+    padding: 5% 4% 0 0;
     font-size: 16px;
 }
 
@@ -27,31 +58,30 @@ body {
 
 .introText {
     font-size: 85px;
-
     color: #585858;
-    padding-top: 50px;
+    padding: 5%;
 }
 
 .introTextBg {
     background-color: #E5E6E1;
 }
 
-.bluebg {
-    background-color: #486FB5;
-}
-
 .btnRow {
-    padding-top: 60px;
-    padding-bottom: 80px;
+    padding: 5% 0 8% 0;
 }
 
 .brdr {
     border: solid 1px red;
 }
 
-.boardingAtFont{
-    padding-top: 10px;
+.boardingAtFont {
+    padding-top: 2%;
     color: #E34728;
+    font-weight: bold;
+}
+
+.boardingAt {
+    padding-top: 3%;
     font-weight: bold;
 }
 
@@ -63,6 +93,7 @@ body {
     border-radius: 10px 10px 0px 0px;
     text-align: center;
 }
+
 .runningStatus-bottom {
     font-size: 18px;
     background-color: #486FB5;
@@ -85,9 +116,10 @@ body {
     font-size: 12px;
     height: 350px;
     overflow-y: scroll;
-    padding:10px;
+    padding: 10px;
     text-align: left;
 }
+
 .input {
     margin-top: 20px;
     padding: 0px 50px 0px 50px;
