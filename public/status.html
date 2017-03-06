@@ -6,8 +6,8 @@
     <script type="text/javascript" src="js/knockout-3.4.1.js"></script>
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="./js/sammy.js"></script>
-    
-    
+
+
     <script type="text/javascript" src="./js/status_app.js"></script>
     <link rel="stylesheet" type="text/css" href="./stylesheets/bootstrap-3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./stylesheets/style.css">
@@ -15,10 +15,21 @@
 
 </head>
 <body id="root">
-<ul class="nav nav-pills" data-bind="foreach:views">
-    <li data-bind="css: {active: $root.currentView() == $data}"> 
-        <a  data-bind="text:$data, attr:{href:'#' + $data}"></a>
+<div style="border:solid 1px red;">
+    <div class="row row-eq-height">
+        <div class="col-sm-4 ">---</div>
+        <div class="col-sm-4 text-center"><img class="logo" src="images/logo.png"></div>
+        <div class="col-sm-4 text-right liveStatus whiteSmokeText"> Live Status</div>
+    </div>
+</div>
+
+<ul class="nav nav-pills topNavigationBar">
+    <span class="enquiryCorner">Enquiry Corner</span>
+    <!-- ko foreach:views  -->
+    <li data-bind="css: {active: $root.currentView() == $data}">
+        <a data-bind="text:$data, attr:{href:'#' + $data}"></a>
     </li>
+    <!-- /ko -->
 </ul>
 
 <div class="container">
@@ -29,32 +40,33 @@
     </div>
 </div>
 
-<script type="text/html" id="Running">
-   <div class="row"> 
-       <div class="col-sm-8"> 
+<script type="text/html" id="Running Status">
+    <div class="row">
+        <div class="col-sm-8">
             <div style="padding: 20%">
                 <div style="text-align: center;">
-                    <div class="runningStatus-top"> 
+                    <div class="runningStatus-top">
                         <span>Get Running Staus</span>
                     </div>
-                    <div class="input form-group"> 
-                        <input style=" text-align: center; "type="text" class="form-control" id="trainNo" placeholder="Enter train name/number">
-                  </div>
-                  <div class="form-group"> 
-                    <button class="btn btn-primary">Submit</button>
-                  </div>
-                  <div class="runningStatus-bottom"> 
+                    <div class="input form-group">
+                        <input style=" text-align: center; " type="text" class="form-control" id="trainNo"
+                               placeholder="Enter train name/number">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">Submit</button>
+                    </div>
+                    <div class="runningStatus-bottom">
                         <span style="visibility: hidden;">Get Running Staus</span>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
-        <div class="col-sm-4"> 
+        <div class="col-sm-4">
             ds
         </div>
     </div>
 </script>
-<script type="text/html" id="PNR">
+<script type="text/html" id="PNR Status">
     <div class="row">
         <div class="col-sm-8">
             <div style="padding: 20%">
@@ -63,7 +75,8 @@
                         <span>Get PNR Staus</span>
                     </div>
                     <div class="input form-group">
-                        <input style=" text-align: center; "type="text" class="form-control" id="trainNo" placeholder="Enter PNR number">
+                        <input style=" text-align: center; " type="text" class="form-control" id="trainNo"
+                               placeholder="Enter PNR number">
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary">Submit</button>
@@ -79,7 +92,53 @@
         </div>
     </div>
 </script>
-<script type="text/html" id="Cancelled">
+<script type="text/html" id="Diverted Trains">
+    <div class="row">
+        <div class="col-sm-8">
+            <div style="padding: 10%">
+                <div style="text-align: center;">
+                    <div class="runningStatus-top">
+                        <span>Diverted Trains</span>
+                    </div>
+                    <div class="cancelledList">
+                        List of Diverted trains
+                    </div>
+
+                    <div class="cancelledStatus-bottom">
+                        <span style="visibility: hidden;">cancelled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            ds
+        </div>
+    </div></script>
+<script type="text/html" id="Rescheduled Trains">
+    <div class="row">
+        <div class="col-sm-8">
+            <div style="padding: 10%">
+                <div style="text-align: center;">
+                    <div class="runningStatus-top">
+                        <span>Rescheduled Trains</span>
+                    </div>
+                    <div class="cancelledList">
+                        List of Rescheduled trains
+                    </div>
+
+                    <div class="cancelledStatus-bottom">
+                        <span style="visibility: hidden;">cancelled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            ds
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="Cancelled Trains">
     <div class="row">
         <div class="col-sm-8">
             <div style="padding: 10%">
@@ -87,8 +146,8 @@
                     <div class="runningStatus-top">
                         <span>Cancelled Staus</span>
                     </div>
-                    <div class="cancelledList" >
-                      List of canceled trains
+                    <div class="cancelledList">
+                        List of canceled trains
                     </div>
 
                     <div class="cancelledStatus-bottom">
