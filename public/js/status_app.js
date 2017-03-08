@@ -1,8 +1,10 @@
 
  $(document).ready(function(){
+
     function viewModel() {
         var self = this;
         self.currentView = ko.observable();
+        self.runningTrainNo = ko.observable();
         self.views = ko.observableArray(["Running Status", "PNR Status","Diverted Trains", "Rescheduled Trains", "Cancelled Trains"]);
         self.show_Contact = ko.computed(function() {
             return self.currentView() === "Running Status" ? true : false;
@@ -19,9 +21,16 @@
         self.show_About = ko.computed(function() {
             return self.currentView() === "Cancelled Trains" ? true : false;
         });
+        self.getRunningStatus = function() {
+            $.get("/scrapping/"+self.runningTrainNo(), function(data){
+                console.log(data);
+            })
+            
+        };
     }
 
     var vm = new viewModel();
+    
     ko.applyBindings(vm, document.getElementById("root"));
     Sammy(function () {
             this.get('#:view', function () {
