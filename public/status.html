@@ -16,8 +16,8 @@
 </head>
 <body id="root">
 <div style="border:solid 1px red;">
-    <div class="row row-eq-height">
-        <div class="col-sm-4 ">---</div>
+    <div class="row">
+        <div class="col-sm-4 "></div>
         <div class="col-sm-4 text-center"><img class="logo" src="images/logo.png"></div>
         <div class="col-sm-4 text-right liveStatus whiteSmokeText"> Live Status</div>
     </div>
@@ -32,7 +32,7 @@
     <!-- /ko -->
 </ul>
 
-<div class="container">
+<div class="container mainContainer">
     <div class="row">
         <div class="span12">
             <div data-bind="template: {name: currentView()}"></div>
@@ -43,15 +43,15 @@
 <script type="text/html" id="Running Status">
     <div class="row">
         <div class="col-sm-8">
-            <div style="padding: 20%">
+            <div class="outerDiv">
                 <div style="text-align: center;">
                     <div class="runningStatus-top">
-                        <span>Get Running Staus</span>
+                        <span>Get Running Status</span>
                     </div>
                     <div class="input form-group">
                         <input id="trainNo" type="text" class="text-center form-control"
                                placeholder="Enter train name/number" maxlength="30"
-                               data-bind="value:trainNumber, valueUpdate:'keyup'">
+                               data-bind="value:runningTrainNo, valueUpdate:'keyup'">
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary"
@@ -59,7 +59,7 @@
                         </button>
                     </div>
 
-                    <!-- <div style="margin: 10px 0px; padding: 10px 0px; border:solid 2px red;">-->
+
                     <div class="form-group text-left brdr" style="width: 350px;">
                         <img src="images/train.png" alt="" height="30"
                              data-bind="style: { 'padding-left': currentPosition()+'px' }"/>
@@ -73,21 +73,21 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            ds
+        
+        <div data-bind="template: {name: 'rightContainer'}" class="col-sm-4 rightContainer">
         </div>
     </div>
 </script>
 <script type="text/html" id="PNR Status">
     <div class="row">
         <div class="col-sm-8">
-            <div style="padding: 20%">
+            <div class="outerDiv">
                 <div style="text-align: center;">
                     <div class="runningStatus-top">
                         <span>Get PNR Staus</span>
                     </div>
                     <div class="input form-group">
-                        <input style=" text-align: center; " type="text" class="form-control" id="trainNo"
+                        <input style=" text-align: center; " type="text" class="form-control" 
                                placeholder="Enter PNR number">
                     </div>
                     <div class="form-group">
@@ -99,15 +99,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            ds
+        <div data-bind="template: {name: 'rightContainer'}" class="col-sm-4 rightContainer">
         </div>
     </div>
 </script>
 <script type="text/html" id="Diverted Trains">
     <div class="row">
         <div class="col-sm-8">
-            <div style="padding: 10%">
+            <div class="outerDiv">
                 <div style="text-align: center;">
                     <div class="runningStatus-top">
                         <span>Diverted Trains</span>
@@ -122,14 +121,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            ds
+        <div data-bind="template: {name: 'rightContainer'}" class="col-sm-4 rightContainer">
         </div>
     </div></script>
 <script type="text/html" id="Rescheduled Trains">
     <div class="row">
         <div class="col-sm-8">
-            <div style="padding: 10%">
+            <div class="outerDiv">
                 <div style="text-align: center;">
                     <div class="runningStatus-top">
                         <span>Rescheduled Trains</span>
@@ -144,8 +142,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            ds
+        <div data-bind="template: {name: 'rightContainer'}" class="col-sm-4 rightContainer">
         </div>
     </div>
 </script>
@@ -153,7 +150,7 @@
 <script type="text/html" id="Cancelled Trains">
     <div class="row">
         <div class="col-sm-8">
-            <div style="padding: 10%">
+            <div class="outerDiv">
                 <div style="text-align: center;">
                     <div class="runningStatus-top">
                         <span>Cancelled Staus</span>
@@ -168,10 +165,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            ds
+        <div data-bind="template: {name: 'rightContainer'}" class="col-sm-4 rightContainer">
         </div>
     </div>
+</script>
+<script type="text/html" id="rightContainer">
+    <h2 class="updatesTitle">For min-by-min updates<br>Download</h2>
+    <div><img src="images/googlePay.png" alt=""></div>
+    <div><img src="images/appStore.png" alt=""></div>
 </script>
 </body>
 </html>

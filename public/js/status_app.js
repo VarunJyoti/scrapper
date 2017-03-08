@@ -1,15 +1,14 @@
 
  $(document).ready(function(){
+
     function viewModel() {
         var model = {
             currentView : ko.observable(),
-            trainNumber : ko.observable(""),
+            runningTrainNo : ko.observable(""),
             currentPosition : ko.observable(0),
             enableGetRunningStatus: ko.observable(false)
-
         };
-
-        model.views = ko.observableArray(["Running Status", "PNR Status","Diverted Trains", "Rescheduled Trains", "Cancelled Trains"]);
+        
         model.show_Contact = ko.computed(function() {
             return model.currentView() === "Running Status" ? true : false;
         });
@@ -27,7 +26,7 @@
         });
 
         model.enableGetRunningStatus = ko.computed(function () {
-            return (model.trainNumber().length>0);
+            return (model.runningTrainNo().length>0);
         });
 
         model.getRunningStatus = getRunningStatus.bind(model)
@@ -48,9 +47,14 @@
              cp = 335
          }*/
          model.currentPosition(cp)
+
+         $.get("/scrapping/"+self.runningTrainNo(), function(data){
+             console.log(data);
+         })
      }
 
     var vm = new viewModel();
+    
     ko.applyBindings(vm, document.getElementById("root"));
     Sammy(function () {
             this.get('#:view', function () {

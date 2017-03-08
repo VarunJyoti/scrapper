@@ -57,7 +57,7 @@ body {
 }
 
 .introText {
-    font-size: 85px;
+    font-size: 5.5vw;
     color: #585858;
     padding: 5%;
 }
@@ -142,4 +142,21 @@ body {
     float: left;
     padding: 0.5% 2% 0.5% 1%;
     color: white;
+}
+.outerDiv {
+    padding: 3% 25% 10% 20%;
+    border-right: 0.5px solid #be9e9e;
+    margin-top: 7%;
+    margin-bottom: 5%;
+}
+.updatesTitle{
+    color: gray;
+}
+.rightContainer{
+    margin-top:50px;
+    text-align: center;
+}
+
+.mainContainer{
+   background-image: url("../images/bg.png")
 }
