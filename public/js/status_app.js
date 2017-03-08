@@ -8,7 +8,9 @@
             currentPosition : ko.observable(0),
             enableGetRunningStatus: ko.observable(false)
         };
-        
+
+        model.views = ko.observableArray(["Running Status", "PNR Status","Diverted Trains", "Rescheduled Trains", "Cancelled Trains"]);
+
         model.show_Contact = ko.computed(function() {
             return model.currentView() === "Running Status" ? true : false;
         });
@@ -35,22 +37,22 @@
     }
 
      function getRunningStatus(model) {
-        if(isNaN(model.trainNumber()))
+        if(isNaN(model.runningTrainNo()))
         {
             alert("enter valid train number");
             return;
         }
          // 70/1400 *50px = x
-         var cp = model.trainNumber() / 1400 * 350;
+         var cp = model.runningTrainNo() / 1400 * 350;
          cp = cp.toFixed(2)
         /* if (cp > 335) {
              cp = 335
          }*/
          model.currentPosition(cp)
 
-         $.get("/scrapping/"+self.runningTrainNo(), function(data){
+        /* $.get("/scrapping/"+self.runningTrainNo(), function(data){
              console.log(data);
-         })
+         })*/
      }
 
     var vm = new viewModel();
