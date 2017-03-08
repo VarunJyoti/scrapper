@@ -49,15 +49,27 @@
                         <span>Get Running Staus</span>
                     </div>
                     <div class="input form-group">
-                        <input style=" text-align: center; " type="text" class="form-control" id="trainNo"
-                               placeholder="Enter train name/number">
+                        <input id="trainNo" type="text" class="text-center form-control"
+                               placeholder="Enter train name/number" maxlength="30"
+                               data-bind="value:trainNumber, valueUpdate:'keyup'">
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary"
+                                data-bind="text:'Submit', click:getRunningStatus, enable:enableGetRunningStatus">
+                        </button>
                     </div>
+
+                    <!-- <div style="margin: 10px 0px; padding: 10px 0px; border:solid 2px red;">-->
+                    <div class="form-group text-left brdr" style="width: 350px;">
+                        <img src="images/train.png" alt="" height="30"
+                             data-bind="style: { 'padding-left': currentPosition()+'px' }"/>
+                    </div>
+                    <span data-bind="text:currentPosition()"></span>
                     <div class="runningStatus-bottom">
                         <span style="visibility: hidden;">Get Running Staus</span>
                     </div>
+
+
                 </div>
             </div>
         </div>
