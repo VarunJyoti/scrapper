@@ -9,9 +9,11 @@
 
 
     <script type="text/javascript" src="./js/status_app.js"></script>
+    <script type="text/javascript" src="./js/underscore-min.js"></script>
     <link rel="stylesheet" type="text/css" href="./stylesheets/bootstrap-3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./stylesheets/style.css">
     <script type="text/javascript" src="./stylesheets/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
 
 </head>
 <body id="root">
@@ -64,7 +66,7 @@
                         <img src="images/train.png" alt="" height="30"
                              data-bind="style: { 'padding-left': currentPosition()+'px' }"/>
                     </div>
-                    <span data-bind="text:currentPosition()"></span>
+                    <span data-bind="text:currentLocation()"></span>
                     <div class="runningStatus-bottom">
                         <span style="visibility: hidden;">Get Running Staus</span>
                     </div>
