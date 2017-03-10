@@ -73,19 +73,19 @@ $(document).ready(function () {
                 model.currentLocation(( model.nextStation().distance - model.preStation().distance) + " from " + model.nextStation().stnCode);
 
                 if (model.currentStation().stnCode == model.preStation().stnCode) {
-                    model.currentPosition(0)
+                    model.currentPosition("0%")
                 }
                 else if (model.currentStation().stnCode == model.nextStation().stnCode) {
-                    model.currentPosition(350)
+                    model.currentPosition("99%")
                     model.currentLocation("");
                 }
                 else if (model.currentStation().dep) {
-                    model.currentPosition(260);
+                    model.currentPosition("75%");
                 }
                 else if (model.currentStation().arr) {
-                    model.currentPosition(175)
+                    model.currentPosition("50%")
                 } else {
-                    model.currentPosition(85)
+                    model.currentPosition("25%")
                 }
             }
         )

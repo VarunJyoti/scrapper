@@ -4,6 +4,17 @@ body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+input {
+    width: 300px !important;
+    height: 50px !important;
+    margin-top: 20px;
+}
+
+.search-btn {
+    height: 50px !important;
+    margin-top: 20px;
+}
+
 .trvlrRedBg {
     background-color: #E34728;
     padding: 20px;
@@ -144,7 +155,7 @@ body {
     color: white;
 }
 .outerDiv {
-    padding: 3% 25% 10% 20%;
+    padding: 0% 25% 10% 20%;
     border-right: 0.5px solid #be9e9e;
     margin-top: 7%;
     margin-bottom: 5%;
@@ -159,4 +170,66 @@ body {
 
 .mainContainer{
    background-image: url("../images/bg.png")
+}
+
+.btn-group-sm button {
+    color: #486FB5;;
+}
+.track {
+    background-image: url("../images/track.png");
+    height: 49px;
+    margin-top: -5px;
+    min-width: 480px;
+    margin-left: -140px;
+}
+
+.bottom-div {
+    border: 1px solid black;
+    padding: 20px;
+}
+
+
+.diamond {
+    width: 0;
+    height: 0;
+    border: 50px solid transparent;
+    border-bottom-color: #b09d9d;
+    position: relative;
+    top: -50px;
+}
+.diamond:after {
+    content: '';
+    position: absolute;
+    left: -50px;
+    top: 50px;
+    width: 0;
+    height: 0;
+    border: 50px solid transparent;
+    border-top-color: #b09d9d;
+}
+
+.circle {
+    width: 50px;
+    height: 50px;
+    background: blue;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    margin-top: 25px;
+    margin-left: -25px;
+    z-index: 100;
+    position: absolute;
+}
+.rectangle {
+    width: 50px;
+    height: 25px;
+    margin-top: 12px;
+    background: #E34728;
+    z-index: 200;
+    position: absolute;
+    padding: 5px;
+}
+
+.stationName{
+    color: white;
 }

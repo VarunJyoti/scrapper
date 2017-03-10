@@ -44,40 +44,76 @@
 
 <script type="text/html" id="Running Status">
     <div class="row">
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4">
+                <div class="input-group">
+                     <input id="trainNo" type="text" class="text-center form-control"
+                               placeholder="Enter train name/number" maxlength="30"
+                               data-bind="value:runningTrainNo, valueUpdate:'keyup'"/>
+                        <button class="btn btn-primary search-btn"
+                                data-bind="click:getRunningStatus, enable:enableGetRunningStatus">
+                                <span class="glyphicon glyphicon-search"></span>
+                        </button>       
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+          
         <div class="col-sm-8">
             <div class="outerDiv">
                 <div style="text-align: center;">
-                    <div class="runningStatus-top">
-                        <span>Get Running Status</span>
-                    </div>
-                    <div class="input form-group">
-                        <input id="trainNo" type="text" class="text-center form-control"
-                               placeholder="Enter train name/number" maxlength="30"
-                               data-bind="value:runningTrainNo, valueUpdate:'keyup'">
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary"
-                                data-bind="text:'Submit', click:getRunningStatus, enable:enableGetRunningStatus">
-                        </button>
+                   
+                    <h2>RajDhani Express</h2>
+                    
+                    <div>
+                        Started from <span>MDLS</span>
                     </div>
 
-
-                    <div class="form-group text-left brdr" style="width: 350px;">
-                        <img src="images/train.png" alt="" height="30"
-                             data-bind="style: { 'padding-left': currentPosition()+'px' }"/>
+                    <div class="btn-group btn-group-sm" style="margin-top:10px" role="group" aria-label="...">
+                      <button type="button" class="btn btn-default">Today</button>
+                      <button type="button" class="btn btn-default">Feb 20</button>
+                      <button type="button" class="btn btn-default">Feb 19</button>
                     </div>
 
-                    <div data-bind="if:preStation">
-                        <span data-bind="text:preStation().stnCode"></span></div>
-
+                    
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="diamond" >
+                                 <div class="circle"><div class="rectangle">
+                                 <div data-bind="if:preStation"><span class="stationName" data-bind="text:preStation().stnCode"></span></div></div></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-left brdr">
+                                <img src="images/train.png" alt="" height="30"
+                                 data-bind="style: { 'padding-left': currentPosition() }"/>  
+                            </div>
+                              
+                            <div class="track"></div>
+                        </div>
+                       <div class="col-sm-3">
+                            <div class="diamond">
+                                 <div class="circle"><div class="rectangle"><div data-bind="if:nextStation"><span class="stationName" data-bind="text:nextStation().stnCode"></span></div></div></div>
+                            </div>
+                        </div>     
+                    </div>
+                   
+                    
                     <span data-bind="text:currentLocation()"></span>
-                    <div data-bind="if:nextStation">
-                        <span data-bind="text:nextStation().stnCode"></span></div>
-                    <div class="runningStatus-bottom">
-                        <span style="visibility: hidden;">Get Running Staus</span>
+                    
+                    <div class="row" style="margin-top:20px">
+                         <div class="col-sm-4 bottom-div">
+                            <span>Dept TND</span><br>
+                            <span>17:00</span>
+                        </div>
+                        <div class="col-sm-4 bottom-div">
+                            <span>ETA at CNB</span><br>
+                            <span>5:00</span>
+                        </div>
+                        <div class="col-sm-4 bottom-div">
+                            <span>15 min</span><br>
+                            <span>early</span>
+                        </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
