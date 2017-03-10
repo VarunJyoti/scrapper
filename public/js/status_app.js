@@ -1,26 +1,31 @@
 $(document).ready(function () {
 
     function viewModel() {
+        function runningStatusModel() {
+            var m = {
+                runningTrainNo: ko.observable(""),
+                currentPosition: ko.observable(0),
+                currentLocation: ko.observable(""),
+                enableGetRunningStatus: ko.observable(false),
+                currentStation: ko.observable(),
+                preStation: ko.observable(),
+                nextStation: ko.observable(),
+                departed: ko.observable(""),
+                distance: ko.observable(0),
+                distanceCovered: ko.observable(0),
+                distanceToCover: ko.observable(0)
+            }
+            return m;
+        };
         var model = {
             currentView: ko.observable(),
-            runningTrainNo: ko.observable(""),
-            currentPosition: ko.observable(0),
-            currentLocation: ko.observable(""),
-            enableGetRunningStatus: ko.observable(false),
-            currentStation: ko.observable(),
-            preStation: ko.observable(),
-            nextStation: ko.observable(),
-            departed: ko.observable(""),
-            distance: ko.observable(0),
-            distanceCovered: ko.observable(0),
-            distanceToCover: ko.observable(0)
-
+            runningStatusModel: runningStatusModel()
         };
-
         model.views = ko.observableArray(["Running Status", "PNR Status", "Diverted Trains", "Rescheduled Trains", "Cancelled Trains"]);
 
         model.show_Contact = ko.computed(function () {
             return model.currentView() === "Running Status" ? true : false;
+
         });
         model.show_Home = ko.computed(function () {
             return model.currentView() === "PNR Status" ? true : false;
@@ -35,23 +40,23 @@ $(document).ready(function () {
             return model.currentView() === "Cancelled Trains" ? true : false;
         });
 
-        model.enableGetRunningStatus = ko.computed(function () {
-            return (model.runningTrainNo().length > 0);
+        model.runningStatusModel.enableGetRunningStatus = ko.computed(function () {
+            return (model.runningStatusModel.runningTrainNo().length > 0);
         });
 
-        model.getRunningStatus = getRunningStatus.bind(model)
+        model.runningStatusModel.getRunningStatus = getRunningStatus.bind(model)
 
         return model;
     }
 
-    function getRunningStatus(model) {
-
+    function getRunningStatus(m) {
+        var model = m.runningStatusModel;
         // 70/1400 *50px = x
 
         $.get("/scrapping/" + model.runningTrainNo(), function (data) {
                 console.log(data);
                 var rake = data[0].rakes[0];
-                model.currentStation(rake.curStn)                
+                model.currentStation(rake.curStn)
                 var toStation = data[0].to;
                 var preStation = rake.stations[0];
                 var stoppingStations = rake.stations.filter(function (s) {

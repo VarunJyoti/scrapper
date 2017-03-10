@@ -47,11 +47,11 @@
         <div class="row">
             <div class="col-lg-4 col-lg-offset-4">
                 <div class="input-group">
-                     <input id="trainNo" type="text" class="text-center form-control"
+                     <input type="text" class="text-center form-control"
                                placeholder="Enter train name/number" maxlength="30"
-                               data-bind="value:runningTrainNo, valueUpdate:'keyup'"/>
+                               data-bind="value:runningStatusModel.runningTrainNo, valueUpdate:'keyup'"/>
                         <button class="btn btn-primary search-btn"
-                                data-bind="click:getRunningStatus, enable:enableGetRunningStatus">
+                                data-bind="click:runningStatusModel.getRunningStatus, enable:runningStatusModel.enableGetRunningStatus">
                                 <span class="glyphicon glyphicon-search"></span>
                         </button>       
                 </div><!-- /input-group -->
@@ -79,26 +79,26 @@
                         <div class="col-sm-3">
                             <div class="diamond" >
                                  <div class="circle"><div class="rectangle">
-                                 <div data-bind="if:preStation"><span class="stationName" data-bind="text:preStation().stnCode"></span></div></div></div>
+                                 <div data-bind="if:runningStatusModel.preStation"><span class="stationName" data-bind="text:runningStatusModel.preStation().stnCode"></span></div></div></div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="text-left brdr">
                                 <img src="images/train.png" alt="" height="30"
-                                 data-bind="style: { 'padding-left': currentPosition() }"/>  
+                                 data-bind="style: { 'padding-left': runningStatusModel.currentPosition() }"/>
                             </div>
                               
                             <div class="track"></div>
                         </div>
                        <div class="col-sm-3">
                             <div class="diamond">
-                                 <div class="circle"><div class="rectangle"><div data-bind="if:nextStation"><span class="stationName" data-bind="text:nextStation().stnCode"></span></div></div></div>
+                                 <div class="circle"><div class="rectangle"><div data-bind="if:runningStatusModel.nextStation"><span class="stationName" data-bind="text:runningStatusModel.nextStation().stnCode"></span></div></div></div>
                             </div>
                         </div>     
                     </div>
                    
                     
-                    <span data-bind="text:currentLocation()"></span>
+                    <span data-bind="text:runningStatusModel.currentLocation()"></span>
                     
                     <div class="row" style="margin-top:20px">
                          <div class="col-sm-4 bottom-div">
