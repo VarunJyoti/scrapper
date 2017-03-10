@@ -7,8 +7,9 @@ $(document).ready(function () {
             currentPosition: ko.observable(0),
             currentLocation: ko.observable(""),
             enableGetRunningStatus: ko.observable(false),
-            stationFrom: ko.observable(""),
-            stationTo: ko.observable(""),
+            currentStation: ko.observable(),
+            preStation: ko.observable(),
+            nextStation: ko.observable(),
             departed: ko.observable(""),
             distance: ko.observable(0),
             distanceCovered: ko.observable(0),
@@ -48,29 +49,46 @@ $(document).ready(function () {
         // 70/1400 *50px = x
 
         $.get("/scrapping/" + model.runningTrainNo(), function (data) {
-            console.log(data);
-            model.stationFrom(data[0].from);
-            model.stationTo(data[0].to);
-            var departed = data[0].rakes[0].departed;
-            if (departed) {
-                var distance = data[0].trainSchedule.stations[data[0].trainSchedule.stations.length - 1].distance;
-                var rakes = data[0].rakes[0].stations.filter(function (st) {
-                    return st.dep == false
+                console.log(data);
+                var rake = data[0].rakes[0];
+                model.currentStation(rake.curStn)                
+                var toStation = data[0].to;
+                var preStation = rake.stations[0];
+                var stoppingStations = rake.stations.filter(function (s) {
+                    return (s.stoppingStn)
                 });
-                var distanceCovered = rakes[0].distance;
-                model.distance(distance)
-                model.distanceCovered(distanceCovered)
-                model.distanceToCover(distance - distanceCovered)
+                var nextStationIndex = 0;
+                stoppingStations.forEach(function (st, index) {
+                    if (st.stnCode == rake.curStn) {
+                        model.currentStation(st);
+                        nextStationIndex = (st.stnCode == toStation) ? index : index + 1;
+                    }
+                    if (nextStationIndex == 0) {
+                        preStation = st;
+                    }
+                })
+                model.preStation(preStation)
+                model.nextStation(stoppingStations[nextStationIndex]);
 
-                var cp = model.distanceCovered() / model.distance() * 350;
-                cp = cp.toFixed(2)
-                model.currentPosition(cp);
-                model.currentLocation(model.distanceToCover() + " from " + model.stationTo());
+                model.currentLocation(( model.nextStation().distance - model.preStation().distance) + " from " + model.nextStation().stnCode);
+
+                if (model.currentStation().stnCode == model.preStation().stnCode) {
+                    model.currentPosition(0)
+                }
+                else if (model.currentStation().stnCode == model.nextStation().stnCode) {
+                    model.currentPosition(350)
+                    model.currentLocation("");
+                }
+                else if (model.currentStation().dep) {
+                    model.currentPosition(260);
+                }
+                else if (model.currentStation().arr) {
+                    model.currentPosition(175)
+                } else {
+                    model.currentPosition(85)
+                }
             }
-            else {
-                // not yet departed
-            }
-        })
+        )
     }
 
     var vm = new viewModel();

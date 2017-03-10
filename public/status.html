@@ -66,7 +66,13 @@
                         <img src="images/train.png" alt="" height="30"
                              data-bind="style: { 'padding-left': currentPosition()+'px' }"/>
                     </div>
+
+                    <div data-bind="if:preStation">
+                        <span data-bind="text:preStation().stnCode"></span></div>
+
                     <span data-bind="text:currentLocation()"></span>
+                    <div data-bind="if:nextStation">
+                        <span data-bind="text:nextStation().stnCode"></span></div>
                     <div class="runningStatus-bottom">
                         <span style="visibility: hidden;">Get Running Staus</span>
                     </div>
@@ -75,7 +81,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div data-bind="template: {name: 'rightContainer'}" class="col-sm-4 rightContainer">
         </div>
     </div>
@@ -89,7 +95,7 @@
                         <span>Get PNR Staus</span>
                     </div>
                     <div class="input form-group">
-                        <input style=" text-align: center; " type="text" class="form-control" 
+                        <input style=" text-align: center; " type="text" class="form-control"
                                placeholder="Enter PNR number">
                     </div>
                     <div class="form-group">
