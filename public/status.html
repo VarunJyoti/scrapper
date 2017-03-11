@@ -147,14 +147,45 @@
 </script>
 <script type="text/html" id="Diverted Trains">
     <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+            <button class="btn btn-primary search-btn"
+                    data-bind="click:getDivertedTrains">
+                <span>Get Diverted Trains</span>
+            </button>
+        </div><!-- /.col-lg-4 -->
+    </div>
+    <div class="row">
         <div class="col-sm-8">
-            <div class="outerDiv">
+            <div class="cancelledOuterDiv">
                 <div style="text-align: center;">
                     <div class="runningStatus-top">
                         <span>Diverted Trains</span>
                     </div>
+                    <div style="padding: 0% 3%">
+                        <div class="row">
+                            <div class="col-sm-4" style="text-align: left;padding-left:4%;">
+                                <h5>Train Name - <br>Train No.</h5></div>
+                            <div class="col-sm-3 text-left" style="padding-left: 2%;">
+                                <h5>From - To</h5></div>
+                            <div class="col-sm-3 text-left" style="padding-left: 2%;">
+                                <h5>Diverted<br> From - To</h5></div>
+                            <div class="col-sm-2 text-left" style="padding-left: 0%;">
+                                <h5>Train Type</h5></div>
+                        </div>
+                    </div>
                     <div class="cancelledList">
-                        List of Diverted trains
+                        <div data-bind="foreach:divertedTrains">
+                            <div class="row" style="padding-bottom:1%;">
+                                <div class="col-sm-4">
+                                    <span data-bind="text:$data.trainName + ' (' + $data.trainNo + ')'"></span></div>
+                                <div class="col-sm-3">
+                                    <span data-bind="text:$data.trainSrc +' - '+ $data.trainDstn"></span></div>
+                                <div class="col-sm-3">
+                                    <span data-bind="text:$data.divertedFrom +' - '+ $data.divertedTo"></span></div>
+                                <div class="col-sm-2">
+                                    <span data-bind="text:$data.trainType"></span></div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="cancelledStatus-bottom">
@@ -168,14 +199,45 @@
     </div></script>
 <script type="text/html" id="Rescheduled Trains">
     <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+            <button class="btn btn-primary search-btn"
+                    data-bind="click:RescheduledTrains">
+                <span>Get Rescheduled Trains</span>
+            </button>
+        </div><!-- /.col-lg-4 -->
+    </div>
+    <div class="row">
         <div class="col-sm-8">
-            <div class="outerDiv">
+            <div class="cancelledOuterDiv">
                 <div style="text-align: center;">
                     <div class="runningStatus-top">
                         <span>Rescheduled Trains</span>
                     </div>
+                    <div style="padding: 0% 3%">
+                        <div class="row">
+                            <div class="col-sm-4" style="text-align: left;padding-left:4%;">
+                                <h5>Train Name</h5></div>
+                            <div class="col-sm-2 text-left" style="padding-left:0%;">
+                                <h5>Train No</h5></div>
+                            <div class="col-sm-3 text-left" style="padding-left: 2%;">
+                                <h5>From - To</h5></div>
+                            <div class="col-sm-3 text-left" style="padding-left: 0%;">
+                                <h5>Train Type</h5></div>
+                        </div>
+                    </div>
                     <div class="cancelledList">
-                        List of Rescheduled trains
+                        <div data-bind="foreach:rescheduledTrains">
+                            <div class="row" style="padding-bottom:1%;">
+                                <div class="col-sm-4">
+                                    <span data-bind="text:$data.trainName"></span></div>
+                                <div class="col-sm-2">
+                                    <span data-bind="text:$data.trainNo"></span></div>
+                                <div class="col-sm-3">
+                                    <span data-bind="text:$data.trainSrc +' - '+ $data.trainDstn"></span></div>
+                                <div class="col-sm-3">
+                                    <span data-bind="text:$data.trainType"></span></div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="cancelledStatus-bottom">
