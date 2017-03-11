@@ -239,3 +239,18 @@ input {
 .stationName{
     color: white;
 }
+.green {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+}
+.red {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+.orange {
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+}

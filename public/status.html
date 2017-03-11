@@ -62,10 +62,10 @@
             <div class="outerDiv">
                 <div style="text-align: center;">
                    
-                    <h2>RajDhani Express</h2>
+                    <h2 data-bind="text:runningStatusModel.trainName()"></h2>
                     
-                    <div>
-                        Started from <span>MDLS</span>
+                    <div data-bind="if:runningStatusModel.currentStation()">
+                        Started from <span data-bind="text:runningStatusModel.currentStation().stnCode"></span>
                     </div>
 
                     <div class="btn-group btn-group-sm" style="margin-top:10px" role="group" aria-label="...">
@@ -89,6 +89,7 @@
                             </div>
                               
                             <div class="track"></div>
+                            <span style="font-weight: bold;" data-bind="text:runningStatusModel.currentLocation()"></span>
                         </div>
                        <div class="col-sm-3">
                             <div class="diamond">
@@ -98,20 +99,17 @@
                     </div>
                    
                     
-                    <span data-bind="text:runningStatusModel.currentLocation()"></span>
-                    
                     <div class="row" style="margin-top:20px">
-                         <div class="col-sm-4 bottom-div">
-                            <span>Dept TND</span><br>
-                            <span>17:00</span>
+                         <div data-bind="if:runningStatusModel.preStation()" class="col-sm-4 bottom-div">
+                            <span>Dept </span><span data-bind="text:runningStatusModel.preStation().stnCode"></span><br><br>
+                            <span style="font-weight: bold" data-bind="text:runningStatusModel.preStation().actDep"></span>
                         </div>
-                        <div class="col-sm-4 bottom-div">
-                            <span>ETA at CNB</span><br>
-                            <span>5:00</span>
+                        <div data-bind="if:runningStatusModel.nextStation()" class="col-sm-4 bottom-div">
+                            <span>ETA at </span><span data-bind="text:runningStatusModel.nextStation().stnCode"></span><br><br>
+                            <span style="font-weight: bold" data-bind="text:runningStatusModel.nextStation().schArrTime"></span>
                         </div>
-                        <div class="col-sm-4 bottom-div">
-                            <span>15 min</span><br>
-                            <span>early</span>
+                        <div data-bind="css:runningStatusModel.runningTextCss, if:runningStatusModel.nextStation()" class="col-sm-4 bottom-div">
+                            <span data-bind="html:runningStatusModel.arrivalText()"></span>
                         </div>
                     </div>
                 </div>
