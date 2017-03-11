@@ -19,11 +19,12 @@ $(document).ready(function () {
         };
         var model = {
             currentView: ko.observable(),
+            cancelledTrains: ko.observableArray(),
             runningStatusModel: runningStatusModel()
         };
         model.views = ko.observableArray(["Running Status", "PNR Status", "Diverted Trains", "Rescheduled Trains", "Cancelled Trains"]);
 
-        model.show_Contact = ko.computed(function () {
+       /* model.show_Contact = ko.computed(function () {
             return model.currentView() === "Running Status" ? true : false;
 
         });
@@ -39,12 +40,16 @@ $(document).ready(function () {
         model.show_About = ko.computed(function () {
             return model.currentView() === "Cancelled Trains" ? true : false;
         });
+*/
 
         model.runningStatusModel.enableGetRunningStatus = ko.computed(function () {
             return (model.runningStatusModel.runningTrainNo().length > 0);
         });
 
         model.runningStatusModel.getRunningStatus = getRunningStatus.bind(model)
+        model.getCancelledTrains = getCancelledTrains.bind(model)
+        model.getDivertedTrains = getDivertedTrains.bind(model)
+        model.getRescheduledTrains = getRescheduledTrains.bind(model)
 
         return model;
     }
@@ -63,7 +68,7 @@ $(document).ready(function () {
                     return (s.stoppingStn)
                 });
                 var nextStationIndex = 0;
-                stoppingStations.forEach(function (st, index) {
+                stoppingStations.foreach(function (st, index) {
                     if (st.stnCode == rake.curStn) {
                         model.currentStation(st);
                         nextStationIndex = (st.stnCode == toStation) ? index : index + 1;
@@ -94,6 +99,37 @@ $(document).ready(function () {
                 }
             }
         )
+    }
+
+    function getCancelledTrains(m) {
+        $.get("/getCancelled", function (data) {
+            debugger;
+            console.log(data);
+           m.cancelledTrains([])
+            data.allCancelledTrains.forEach(function (ct) {
+                var t={
+                    startDate : ct.startDate,
+                    trainDstn: ct.trainDstn,
+                    trainName:ct.trainName,
+                    trainNo:ct.trainNo,
+                    trainSrc:ct.trainSrc,
+                    trainType:ct.trainType
+                }
+                m.cancelledTrains.push(t);
+            })
+        });
+    }
+
+    function getDivertedTrains() {
+        $.get("/getDiverted", function (data) {
+            console.log(data);
+        });
+    }
+
+    function getRescheduledTrains() {
+        $.get("/getRescheduled", function (data) {
+            console.log(data);
+        });
     }
 
     var vm = new viewModel();

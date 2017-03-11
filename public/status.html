@@ -17,7 +17,7 @@
 
 </head>
 <body id="root">
-<div style="border:solid 1px red;">
+<div>
     <div class="row">
         <div class="col-sm-4 "></div>
         <div class="col-sm-4 text-center"><img class="logo" src="images/logo.png"></div>
@@ -193,14 +193,45 @@
 
 <script type="text/html" id="Cancelled Trains">
     <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+                <button class="btn btn-primary search-btn"
+                        data-bind="click:getCancelledTrains">
+                    <span>Get Cancelled Trains</span>
+                </button>
+        </div><!-- /.col-lg-4 -->
+    </div>
+    <div class="row">
         <div class="col-sm-8">
-            <div class="outerDiv">
+            <div class="cancelledOuterDiv">
                 <div style="text-align: center;">
                     <div class="runningStatus-top">
                         <span>Cancelled Staus</span>
                     </div>
+                    <div style="padding: 0% 3%">
+                        <div class="row">
+                            <div class="col-sm-4" style="text-align: left;padding-left:4%;">
+                                <h5>Train Name</h5></div>
+                            <div class="col-sm-2 text-left" style="padding-left:0%;">
+                                <h5>Train No</h5></div>
+                            <div class="col-sm-3 text-left" style="padding-left: 2%;">
+                                <h5>From - To</h5></div>
+                            <div class="col-sm-3 text-left" style="padding-left: 0%;">
+                                <h5>Train Type</h5></div>
+                        </div>
+                    </div>
                     <div class="cancelledList">
-                        List of canceled trains
+                        <div data-bind="foreach:cancelledTrains">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <span data-bind="text:$data.trainName"></span></div>
+                                <div class="col-sm-2">
+                                    <span data-bind="text:$data.trainNo"></span></div>
+                                <div class="col-sm-3">
+                                    <span data-bind="text:$data.trainSrc +' - '+ $data.trainDstn"></span></div>
+                                <div class="col-sm-3">
+                                    <span data-bind="text:$data.trainType"></span></div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="cancelledStatus-bottom">
