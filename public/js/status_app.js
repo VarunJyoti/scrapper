@@ -163,19 +163,24 @@ $(document).ready(function () {
         })
     }
 
-    function getRescheduledTrains() {
+    function getRescheduledTrains(m) {
         $.get("/getRescheduled", function (data) {
             console.log(data);
             m.rescheduledTrains([]);
             debugger;
-            data.allCancelledTrains.forEach(function (ct) {
+            data.trains.forEach(function (ct) {
                 var t = {
                     startDate: ct.startDate,
                     trainDstn: ct.trainDstn,
                     trainName: ct.trainName,
                     trainNo: ct.trainNo,
                     trainSrc: ct.trainSrc,
-                    trainType: ct.trainType
+                    trainType: ct.trainType,
+                    startDate: ct.startDate,
+                    newStartDate: ct.newStartDate,
+                    actDep: ct.actDep,
+                    schDep: ct.schDep,
+
                 }
                 m.rescheduledTrains.push(t);
             })
