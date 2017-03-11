@@ -3,6 +3,7 @@ $(document).ready(function () {
     function viewModel() {
         function runningStatusModel() {
             var m = {
+                trainName: ko.observable(""),
                 runningTrainNo: ko.observable(""),
                 currentPosition: ko.observable(0),
                 currentLocation: ko.observable(""),
@@ -13,7 +14,9 @@ $(document).ready(function () {
                 departed: ko.observable(""),
                 distance: ko.observable(0),
                 distanceCovered: ko.observable(0),
-                distanceToCover: ko.observable(0)
+                distanceToCover: ko.observable(0),
+                arrivalText: ko.observable(""),
+                runningTextCss: ko.observable("")
             }
             return m;
         };
@@ -49,6 +52,21 @@ $(document).ready(function () {
         return model;
     }
 
+    function setArrivalText(model){
+        
+        var delayArr = model.nextStation().delayArr;
+        if(delayArr === 0){
+            model.arrivalText("ON <br><br>Time");
+            model.runningTextCss("green");
+        }else if(delayArr > 0){
+            model.arrivalText(delayArr+" mins <br><br>Late");
+            model.runningTextCss("red");
+        }else if(delayArr<1){
+            model.arrivalText(delayArr+" mins <br><br>Early");
+            model.runningTextCss("orange");
+        }
+    }
+
     function getRunningStatus(m) {
         var model = m.runningStatusModel;
         // 70/1400 *50px = x
@@ -56,6 +74,7 @@ $(document).ready(function () {
         $.get("/scrapping/" + model.runningTrainNo(), function (data) {
                 console.log(data);
                 var rake = data[0].rakes[0];
+                model.trainName(model.runningTrainNo()+ " " + data[0].trainName);
                 model.currentStation(rake.curStn)
                 var toStation = data[0].to;
                 var preStation = rake.stations[0];
@@ -92,6 +111,8 @@ $(document).ready(function () {
                 } else {
                     model.currentPosition("25%")
                 }
+
+                setArrivalText(model);
             }
         )
     }
