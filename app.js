@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var scrapping = require('./routes/scrapping');
 var cancelled = require('./routes/cancelled');
 var diverted = require('./routes/diverted');
+var rescheduled = require('./routes/rescheduled');
 
 var index = require('./routes/index');
 
@@ -33,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use("/", scrapping);
 app.use("/", cancelled);
 app.use("/", diverted);
-
+app.use("/", rescheduled);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
