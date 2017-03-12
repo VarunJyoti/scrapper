@@ -77,9 +77,9 @@ $(document).ready(function () {
     function getRunningStatus(m) {
         var model = m.runningStatusModel;
         // 70/1400 *50px = x
-
+        $("#overlay").show();
         $.get("/scrapping/" + model.runningTrainNo(), function (data) {
-                console.log(data);
+                $("#overlay").hide();
                 var rake = data[0].rakes[0];
                 model.trainName(model.runningTrainNo()+ " " + data[0].trainName);
                 model.currentStation(rake.curStn)
@@ -89,7 +89,7 @@ $(document).ready(function () {
                     return (s.stoppingStn)
                 });
                 var nextStationIndex = 0;
-                stoppingStations.foreach(function (st, index) {
+                stoppingStations.forEach(function (st, index) {
                     if (st.stnCode == rake.curStn) {
                         model.currentStation(st);
                         nextStationIndex = (st.stnCode == toStation) ? index : index + 1;
@@ -125,8 +125,9 @@ $(document).ready(function () {
     }
 
     function getCancelledTrains(m) {
+        $("#overlay").show();
         $.get("/getCancelled", function (data) {
-            console.log(data);
+            $("#overlay").hide();
             m.cancelledTrains([])
             data.allCancelledTrains.forEach(function (ct) {
                 var t = {
@@ -143,8 +144,9 @@ $(document).ready(function () {
     }
 
     function getDivertedTrains(m) {
+        $("#overlay").show();
         $.get("/getDiverted", function (data) {
-            console.log(data);
+            $("#overlay").hide();
             m.divertedTrains([]);
             debugger;
             data.trains.forEach(function (ct) {
@@ -164,10 +166,11 @@ $(document).ready(function () {
     }
 
     function getRescheduledTrains(m) {
+        $("#overlay").show();
         $.get("/getRescheduled", function (data) {
-            console.log(data);
+            $("#overlay").hide();
             m.rescheduledTrains([]);
-            debugger;
+
             data.trains.forEach(function (ct) {
                 var t = {
                     startDate: ct.startDate,
