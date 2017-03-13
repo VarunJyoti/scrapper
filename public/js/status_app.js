@@ -1,5 +1,33 @@
 $(document).ready(function () {
 
+    var isMobile = {
+        Android: function () {
+            return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function () {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function () {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function () {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function () {
+            return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
+        },
+        any: function () {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        }
+    };
+    if (isMobile.any()) {
+        if (isMobile.Android()) {
+            alert("Android device")
+        }
+        if (isMobile.iOS()) {
+            alert("apple store")
+        }
+    }
     function viewModel() {
         var runningData = null;
         function runningStatusModel() {
@@ -79,7 +107,6 @@ $(document).ready(function () {
 
     function getRunningStatus(m) {
         var model = m.runningStatusModel;
-        // 70/1400 *50px = x
         $("#overlay").show();
         $.get("/scrapping/" + model.runningTrainNo(), function (data) {
                 $("#overlay").hide();
@@ -134,10 +161,10 @@ $(document).ready(function () {
     }
 
     function getCancelledTrains(m) {
+        m.cancelledTrains([])
         $("#overlay").show();
         $.get("/getCancelled", function (data) {
             $("#overlay").hide();
-            m.cancelledTrains([]);
             data.allCancelledTrains.forEach(function (ct) {
                 var t = {
                     startDate: ct.startDate,
@@ -153,10 +180,10 @@ $(document).ready(function () {
     }
 
     function getDivertedTrains(m) {
+        m.divertedTrains([]);
         $("#overlay").show();
         $.get("/getDiverted", function (data) {
             $("#overlay").hide();
-            m.divertedTrains([]);
             data.trains.forEach(function (ct) {
                 var t = {
                     startDate: ct.startDate,
@@ -174,11 +201,10 @@ $(document).ready(function () {
     }
 
     function getRescheduledTrains(m) {
+        m.rescheduledTrains([]);
         $("#overlay").show();
         $.get("/getRescheduled", function (data) {
             $("#overlay").hide();
-            m.rescheduledTrains([]);
-
             data.trains.forEach(function (ct) {
                 var t = {
                     startDate: ct.startDate,
