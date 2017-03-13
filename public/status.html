@@ -72,10 +72,10 @@
                         Started from <span data-bind="text:runningStatusModel.currentStation().stnCode"></span>
                     </div>
 
-                    <div class="btn-group btn-group-sm" style="margin-top:10px" role="group" aria-label="...">
-                      <button type="button" class="btn btn-default">Today</button>
-                      <button type="button" class="btn btn-default">Feb 20</button>
-                      <button type="button" class="btn btn-default">Feb 19</button>
+                    <div class="btn-group btn-group-sm" data-bind="foreach: runningStatusModel.rakes" style="margin-top:10px" role="group" aria-label="...">
+
+                      <button type="button" data-bind="text: $data.startDate, click:$parent.runningStatusModel.setRakeBasedData.bind(null, $data, $parent.runningStatusModel)" class="btn btn-default"></button>
+                      
                     </div>
 
                     

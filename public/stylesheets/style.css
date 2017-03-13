@@ -178,9 +178,6 @@ input {
    background-image: url("../images/bg.png")
 }
 
-.btn-group-sm button {
-    color: #486FB5;;
-}
 .track {
     background-image: url("../images/track.png");
     height: 49px;
@@ -269,4 +266,9 @@ input {
     padding-top: 10%;
     opacity: 0.5;
     display: none;
+}
+.btn-default:active, .btn-default:focus{
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
 }

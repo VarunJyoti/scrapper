@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
     function viewModel() {
+        var runningData = null;
         function runningStatusModel() {
             var m = {
                 trainName: ko.observable(""),
@@ -16,7 +17,8 @@ $(document).ready(function () {
                 distanceCovered: ko.observable(0),
                 distanceToCover: ko.observable(0),
                 arrivalText: ko.observable(""),
-                runningTextCss: ko.observable("")
+                runningTextCss: ko.observable(""),
+                rakes: ko.observableArray()
             }
             return m;
         };
@@ -55,6 +57,7 @@ $(document).ready(function () {
         model.getCancelledTrains = getCancelledTrains.bind(model)
         model.getDivertedTrains = getDivertedTrains.bind(model)
         model.getRescheduledTrains = getRescheduledTrains.bind(model)
+        model.runningStatusModel.setRakeBasedData = setRakeBasedData;
 
         return model;
     }
@@ -80,55 +83,61 @@ $(document).ready(function () {
         $("#overlay").show();
         $.get("/scrapping/" + model.runningTrainNo(), function (data) {
                 $("#overlay").hide();
-                var rake = data[0].rakes[0];
+                runningData = data[0];
+                model.rakes(runningData.rakes);
                 model.trainName(model.runningTrainNo()+ " " + data[0].trainName);
-                model.currentStation(rake.curStn)
-                var toStation = data[0].to;
-                var preStation = rake.stations[0];
-                var stoppingStations = rake.stations.filter(function (s) {
-                    return (s.stoppingStn)
-                });
-                var nextStationIndex = 0;
-                stoppingStations.forEach(function (st, index) {
-                    if (st.stnCode == rake.curStn) {
-                        model.currentStation(st);
-                        nextStationIndex = (st.stnCode == toStation) ? index : index + 1;
-                    }
-                    if (nextStationIndex == 0) {
-                        preStation = st;
-                    }
-                })
-                model.preStation(preStation)
-                model.nextStation(stoppingStations[nextStationIndex]);
-
-                model.currentLocation(( model.nextStation().distance - model.preStation().distance) + " from " + model.nextStation().stnCode);
-
-                if (model.currentStation().stnCode == model.preStation().stnCode) {
-                    model.currentPosition("0%")
-                }
-                else if (model.currentStation().stnCode == model.nextStation().stnCode) {
-                    model.currentPosition("99%")
-                    model.currentLocation("");
-                }
-                else if (model.currentStation().dep) {
-                    model.currentPosition("75%");
-                }
-                else if (model.currentStation().arr) {
-                    model.currentPosition("50%")
-                } else {
-                    model.currentPosition("25%")
-                }
-
-                setArrivalText(model);
+                var rake = runningData.rakes[0];
+                setRakeBasedData(rake, model);
             }
         )
+    }
+
+    function setRakeBasedData(rake, model){
+            model.currentStation(rake.curStn);
+            var toStation = runningData.to;
+            var preStation = rake.stations[0];
+            var stoppingStations = rake.stations.filter(function (s) {
+                return (s.stoppingStn)
+            });
+            var nextStationIndex = 0;
+            stoppingStations.forEach(function (st, index) {
+                if (st.stnCode == rake.curStn) {
+                    model.currentStation(st);
+                    nextStationIndex = (st.stnCode == toStation) ? index : index + 1;
+                }
+                if (nextStationIndex == 0) {
+                    preStation = st;
+                }
+            })
+            model.preStation(preStation)
+            model.nextStation(stoppingStations[nextStationIndex]);
+
+            model.currentLocation(( model.nextStation().distance - model.preStation().distance) + " Kms from " + model.nextStation().stnCode);
+
+            if (model.currentStation().stnCode == model.preStation().stnCode) {
+                model.currentPosition("0%")
+            }
+            else if (model.currentStation().stnCode == model.nextStation().stnCode) {
+                model.currentPosition("99%")
+                model.currentLocation("");
+            }
+            else if (model.currentStation().dep) {
+                model.currentPosition("75%");
+            }
+            else if (model.currentStation().arr) {
+                model.currentPosition("50%")
+            } else {
+                model.currentPosition("25%")
+            }
+
+            setArrivalText(model);
     }
 
     function getCancelledTrains(m) {
         $("#overlay").show();
         $.get("/getCancelled", function (data) {
             $("#overlay").hide();
-            m.cancelledTrains([])
+            m.cancelledTrains([]);
             data.allCancelledTrains.forEach(function (ct) {
                 var t = {
                     startDate: ct.startDate,
@@ -148,7 +157,6 @@ $(document).ready(function () {
         $.get("/getDiverted", function (data) {
             $("#overlay").hide();
             m.divertedTrains([]);
-            debugger;
             data.trains.forEach(function (ct) {
                 var t = {
                     startDate: ct.startDate,
