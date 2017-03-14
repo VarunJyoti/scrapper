@@ -1,4 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,24 +22,28 @@
     <img src="/images/loader.gif" alt="Loading" /><br/>
     Loading...
 </div>
-<div>
+<div class="container-fluid brdr" style="padding: 0%">
     <div class="row">
         <div class="col-sm-4 "></div>
         <div class="col-sm-4 text-center"><img class="logo" src="images/logo.png"></div>
         <div class="col-sm-4 text-right liveStatus whiteSmokeText"> Live Status</div>
     </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="nav nav-pills topNavigationBar">
+                <span class="enquiryCorner">Enquiry Corner</span>
+                <!-- ko foreach:views  -->
+                <li data-bind="css: {active: $root.currentView() == $data}">
+                    <a data-bind="text:$data, attr:{href:'#' + $data}"></a>
+                </li>
+                <!-- /ko -->
+            </ul>
+        </div>
+    </div>
 </div>
 
-<ul class="nav nav-pills topNavigationBar">
-    <span class="enquiryCorner">Enquiry Corner</span>
-    <!-- ko foreach:views  -->
-    <li data-bind="css: {active: $root.currentView() == $data}">
-        <a data-bind="text:$data, attr:{href:'#' + $data}"></a>
-    </li>
-    <!-- /ko -->
-</ul>
-
-<div class="container mainContainer">
+<div class="container-fluid mainContainer">
     <div class="row">
         <div class="span12">
             <div data-bind="template: {name: currentView()}"></div>

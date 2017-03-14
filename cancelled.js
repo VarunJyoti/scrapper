@@ -28,7 +28,6 @@ function outer1() {
                         var textData = data.text().trim();
                         var split = [];
                         if (textData.indexOf("\n") === -1) {
-                            console.log(textData);
                             split = textData.split("=");
                             if (split.length > 1) {
                                 if (tempName === split[1]) {
@@ -89,7 +88,7 @@ function outer1() {
                     method: "GET",
                     jar: jar
                 }, function (error1, response1, jsonData) {
-                    console.log(jsonData);
+                    
                     //convert to json
                     try {
                         var x = eval(jsonData);

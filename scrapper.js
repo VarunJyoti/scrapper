@@ -114,7 +114,7 @@ function outer() {
                     method: "GET",
                     jar: jar
                 }, function (error1, response1, jsonData) {
-                    console.log(jsonData);
+                    
                     function getDaysOfRunString() {
                     }
 

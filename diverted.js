@@ -89,7 +89,7 @@ function outer2() {
                     method: "GET",
                     jar: jar
                 }, function (error1, response1, jsonData) {
-                    console.log(jsonData);
+                    
                     //convert to json
                     try {
                         var x = eval(jsonData);
