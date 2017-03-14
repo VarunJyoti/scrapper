@@ -150,7 +150,7 @@ input {
     color: white;
 }
 .outerDiv {
-    padding: 0% 25% 10% 20%;
+    padding: 0% 15% 10% 15%;
     border-right: 0.5px solid #be9e9e;
     margin-top: 7%;
     margin-bottom: 5%;
@@ -177,8 +177,12 @@ input {
     background-image: url("../images/track.png");
     height: 49px;
     margin-top: -5px;
-    min-width: 480px;
-    margin-left: -140px;
+    min-width: 235%;
+    
+}
+
+.col-sm-6 .track{
+    margin-left: -64%;
 }
 
 .bottom-div {
@@ -266,4 +270,23 @@ input {
     color: #fff;
     background-color: #337ab7;
     border-color: #2e6da4;
+}
+#myNavbar {
+    padding-top: 10px;
+}
+
+.navbar-header .navbar-brand {
+    color: white;
+}
+.navbar-default {
+    background-color: #E34728;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: white;
+    background-color: #486FB5;
 }
