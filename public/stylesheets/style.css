@@ -17,7 +17,6 @@ input {
 
 .trvlrRedBg {
     background-color: #E34728;
-    padding: 20px;
     border-radius: 10px 10px 0px 0px;
 }
 
@@ -71,10 +70,6 @@ input {
     font-size: 5.5vw;
     color: #585858;
     padding: 5%;
-}
-
-.introTextBg {
-    background-color: #E5E6E1;
 }
 
 .btnRow {
