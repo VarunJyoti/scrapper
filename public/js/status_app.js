@@ -125,7 +125,7 @@ $(document).ready(function () {
         var toStation = runningData.to;
         var isFound = false;
         var preStation = rake.stations[0];
-        rake.stations.forEach(function (st, index) {
+        $.each(rake.stations, function (index, st) {
             if (isFound && st.stoppingStn) {
                 // find next stopping station
                 model.nextStation(st);
@@ -143,7 +143,8 @@ $(document).ready(function () {
             if (st.stoppingStn && !isFound) {
                 preStation = st;
             }
-        })
+        });
+
         model.preStation(preStation)
 
 
