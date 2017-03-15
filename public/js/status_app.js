@@ -122,7 +122,6 @@ $(document).ready(function () {
     }
 
     function setRakeBasedData(rake, model) {
-        model.currentStation(rake.curStn);
         var toStation = runningData.to;
         var isFound = false;
         var preStation = rake.stations[0];
@@ -135,6 +134,7 @@ $(document).ready(function () {
 
             if (!isFound && st.stnCode == rake.curStn) {
                 isFound = true;
+                model.currentStation(st);
                 if (st.stnCode == toStation) {
                     //reach destination
                     model.nextStation(st);
@@ -151,19 +151,20 @@ $(document).ready(function () {
 
         model.currentLocation(( model.nextStation().distance - model.preStation().distance) + " Kms from " + model.nextStation().stnCode);
 
-        model.currentStationStatus("Not yet departed from " + model.currentStation());
+        model.currentStationStatus("Not yet departed from " + model.currentStation().stnCode);
         if (model.currentStation().stnCode == model.preStation().stnCode) {
             model.currentPosition("0%")
         }
         else if (model.currentStation().stnCode == model.nextStation().stnCode) {
             model.currentPosition("99%")
             model.currentLocation("");
+            model.currentStationStatus("Arrived at " + model.currentStation().stnCode)
         }
         else if (model.currentStation().dep) {
             model.currentPosition("75%");
-            model.currentStationStatus("Departed from " +model.currentStation())
+            model.currentStationStatus("Departed from " + model.currentStation().stnCode)
         }
-        else if (model.currentStation().arr) {
+        else if (model.currentStation().arr){
             model.currentPosition("50%")
         } else {
             model.currentPosition("25%")
