@@ -185,27 +185,24 @@
                     </div>
                     <div style="padding: 0% 3%">
                         <div class="row">
-                            <div class="col-sm-4" style="text-align: left;padding-left:4%;">
+                            <div class="col-sm-6 col-xs-6" style="text-align: left;padding-left:4%;">
                                 <h5>Train Name - Train No</h5></div>
-                            <div class="col-sm-3 text-left" style="padding-left: 2%;">
+                            <div class="col-sm-3 text-left col-xs-3" style="padding-left: 2%;">
                                 <h5>From - To</h5></div>
-                            <div class="col-sm-3 text-left" style="padding-left: 2%;">
+                            <div class="col-sm-3 col-xs-3 text-left" style="padding-left: 2%;">
                                 <h5>Diverted<br> From - To</h5></div>
-                            <div class="col-sm-2 text-left" style="padding-left: 0%;">
-                                <h5>Train Type</h5></div>
+
                         </div>
                     </div>
                     <div class="cancelledList">
                         <div data-bind="foreach:divertedTrains">
                             <div class="row" style="padding-bottom:1%;">
-                                <div class="col-sm-4">
+                                <div class="col-sm-6 col-xs-6">
                                     <span data-bind="text:$data.trainName + ' (' + $data.trainNo + ')'"></span></div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-3 col-xs-3">
                                     <span data-bind="text:$data.trainSrc +' - '+ $data.trainDstn"></span></div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-3 col-xs-3">
                                     <span data-bind="text:$data.divertedFrom +' - '+ $data.divertedTo"></span></div>
-                                <div class="col-sm-2">
-                                    <span data-bind="text:$data.trainType"></span></div>
                             </div>
                         </div>
                     </div>
@@ -239,27 +236,25 @@
                     </div>
                     <div style="padding: 0% 3%">
                         <div class="row">
-                            <div class="col-sm-4" style="text-align: left;padding-left:4%;">
+                            <div class="col-sm-4 col-xs-4" style="text-align: left;padding-left:4%;">
                                 <h5>Train Name - No</h5></div>
-                            <div class="col-sm-3 text-left" style="padding-left: 2%;">
+                            <div class="col-sm-4 col-xs-4 text-left" style="padding-left: 2%;">
                                 <h5>Scheduled At</h5></div>
-                            <div class="col-sm-3 text-left" style="padding-left: 2%;">
+                            <div class="col-sm-4 col-xs-4 text-left" style="padding-left: 2%;">
                                 <h5>Rescheduled</h5></div>
-                            <div class="col-sm-2 text-left" style="padding-left: 0%;">
-                                <h5>Train Type</h5></div>
+
                         </div>
                     </div>
                     <div class="cancelledList">
                         <div data-bind="foreach:rescheduledTrains">
                             <div class="row" style="padding-bottom:1%;">
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 col-xs-4">
                                     <span data-bind="text:$data.trainName + ' (' + $data.trainNo + ')'"></span></div>
-                                <div class="col-sm-3" style="padding-left: 1%;">
+                                <div class="col-sm-4 col-xs-4" style="padding-left: 1%;">
                                     <span data-bind="text:$data.startDate +' - '+ $data.schDep"></span></div>
-                                <div class="col-sm-3" style="padding-left: 1%;">
+                                <div class="col-sm-4 col-xs-4" style="padding-left: 1%;">
                                     <span data-bind="text:$data.newStartDate +' - '+ $data.actDep"></span></div>
-                                <div class="col-sm-2">
-                                    <span data-bind="text:$data.trainType"></span></div>
+
                             </div>
                         </div>
                     </div>
@@ -295,27 +290,24 @@
                     </div>
                     <div style="padding: 0% 3%">
                         <div class="row">
-                            <div class="col-sm-4" style="text-align: left;padding-left:4%;">
+                            <div class="col-sm-5 col-xs-5" style="text-align: left;padding-left:4%;">
                                 <h5>Train Name - No</h5></div>
-                            <div class="col-sm-3 text-left">
+                            <div class="col-sm-3 col-xs-3 text-left">
                                 <h5>Date</h5></div>
-                            <div class="col-sm-3 text-left" style="padding-left: 1%;">
+                            <div class="col-sm-4 col-xs-4 text-left" style="padding-left: 1%;">
                                 <h5>From - To</h5></div>
-                            <div class="col-sm-2 text-left" style="padding-left: 0%;">
-                                <h5>Train Type</h5></div>
+
                         </div>
                     </div>
                     <div class="cancelledList">
                         <div data-bind="foreach:cancelledTrains">
                             <div class="row" style="padding-bottom:1.5%;">
-                                <div class="col-sm-4">
+                                <div class="col-sm-5 col-xs-5">
                                     <span data-bind="text:$data.trainName + ' (' + $data.trainNo + ')'"></span></div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-3 col-xs-3">
                                     <span data-bind="text:$data.startDate"></span></div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-4 col-xs-4">
                                     <span data-bind="text:$data.trainSrc +' - '+ $data.trainDstn"></span></div>
-                                <div class="col-sm-2">
-                                    <span data-bind="text:$data.trainType"></span></div>
                             </div>
                         </div>
                     </div>
