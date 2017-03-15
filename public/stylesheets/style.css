@@ -120,7 +120,8 @@ input {
 
 .cancelledList {
     font-size: 11px;
-    height: 400px;
+    min-height: 150px;
+    max-height: 350px;
     overflow-y: scroll;
     overflow-x: hidden;
     padding: 2.7%;
@@ -291,3 +292,6 @@ input {
     color: white;
     background-color: #486FB5;
 }
+
+.icon-bar{
+    background-color: white!important;}
