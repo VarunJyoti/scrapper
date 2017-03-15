@@ -39,6 +39,7 @@ $(document).ready(function () {
                 currentLocation: ko.observable(""),
                 enableGetRunningStatus: ko.observable(false),
                 currentStation: ko.observable(),
+                currentStationStatus: ko.observable(),
                 preStation: ko.observable(),
                 nextStation: ko.observable(),
                 departed: ko.observable(""),
@@ -149,6 +150,7 @@ $(document).ready(function () {
 
         model.currentLocation(( model.nextStation().distance - model.preStation().distance) + " Kms from " + model.nextStation().stnCode);
 
+        model.currentStationStatus("Not yet departed from " + model.currentStation());
         if (model.currentStation().stnCode == model.preStation().stnCode) {
             model.currentPosition("0%")
         }
@@ -158,6 +160,7 @@ $(document).ready(function () {
         }
         else if (model.currentStation().dep) {
             model.currentPosition("75%");
+            model.currentStationStatus("Departed from " +model.currentStation())
         }
         else if (model.currentStation().arr) {
             model.currentPosition("50%")

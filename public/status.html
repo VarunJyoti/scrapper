@@ -87,14 +87,18 @@
 
                     <h2 data-bind="text:runningStatusModel.trainName()"></h2>
 
-                    <div data-bind="if:runningStatusModel.currentStation()">
-                        Started from <span data-bind="text:runningStatusModel.currentStation().stnCode"></span>
+                    <div data-bind="if:runningStatusModel.currentStationStatus()" style="margin-bottom: 2%">
+                        <span data-bind="text:runningStatusModel.currentStationStatus()"></span>
                     </div>
 
-                    <div class="btn-group btn-group-sm" data-bind="foreach: runningStatusModel.rakes" style="margin-top:10px" role="group" aria-label="...">
-                      <button type="button" data-bind="text: $data.startDate, click:$parent.runningStatusModel.setRakeBasedData.bind(null, $data, $parent.runningStatusModel)" class="btn btn-default"></button>
+                    <div data-bind="if:runningStatusModel.rakes().length>1">
+                        <div class="btn-group btn-group-sm" data-bind="  foreach: runningStatusModel.rakes"
+                             style="margin-bottom:2%" role="group" aria-label="...">
+                            <button type="button"
+                                    data-bind="text: $data.startDate, click:$parent.runningStatusModel.setRakeBasedData.bind(null, $data, $parent.runningStatusModel)"
+                                    class="btn btn-default"></button>
+                        </div>
                     </div>
-
                     <div class="row">
                         <div class="col-sm-3 col-xs-4">
                             <div class="diamond" >
