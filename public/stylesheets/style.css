@@ -294,4 +294,14 @@ input {
 }
 
 .icon-bar{
-    background-color: white!important;}
+    background-color: white!important;
+}
+.pnrStatus {
+    text-align: left;
+    padding-left: 15%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #be9e9e;
+}
+.pnrStatus div {
+    margin-top: 10px;
+}

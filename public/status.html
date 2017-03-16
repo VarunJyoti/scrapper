@@ -146,22 +146,54 @@
 </script>
 <script type="text/html" id="PNR Status">
     <div class="row">
+        <div class="row">
+            <div class="col-sm-4 col-xs-1"></div>
+            <div class="col-sm-4 col-xs-11">
+                <div class="input-group">
+                    <input type="text" class="text-center form-control"
+                           placeholder="Enter PNR number" maxlength="30"
+                           data-bind="value:pnrModel.pnrNo, valueUpdate:'keyup'"/>
+                    <button class="btn btn-primary search-btn"
+                            data-bind="click:pnrModel.getPNRStatus, enable:pnrModel.enableGetPNRStatus">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-4 -->
+            <div class="col-sm-4 col-xs-0"></div>
+        </div><!-- /.row -->
         <div class="col-sm-8">
             <div class="outerDiv">
                 <div style="text-align: center;">
-                    <div class="runningStatus-top">
-                        <span>Get PNR Staus</span>
+                    <h2 data-bind="text:pnrModel.trainName()"></h2>
+                    <div class="pnrStatus">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-6">
+                                Train Name: <span data-bind="text: pnrModel.trainName()"></span>
+                            </div>
+                            <div class="col-md-6 col-xs-6">
+                                Date: <span data-bind="text: pnrModel.date()"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-xs-6">
+                                From: <span data-bind="text: pnrModel.from()"></span>
+                            </div>
+                            <div class="col-md-6 col-xs-6">
+                                To: <span data-bind="text: pnrModel.to()"></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="input form-group">
-                        <input style=" text-align: center; " type="text" class="form-control"
-                               placeholder="Enter PNR number">
+                    <div style="padding-top: 10px" data-bind="foreach:pnrModel.passengers">
+                        <div style="margin-bottom: 10px" class="row">
+                            <div class="col-sm-3 col-xs-3">
+                                Passenger <span data-bind="text: $index++"></span>
+                            </div>
+                            <div class="col-sm-3 col-xs-3" data-bind="text: $data.name"></div>
+                            <div class="col-sm-3 col-xs-3" data-bind="text: $data.seat"></div>
+                            <div class="col-sm-3 col-xs-3" data-bind="text: $data.status"></div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary">Submit</button>
-                    </div>
-                    <div class="runningStatus-bottom">
-                        <span style="visibility: hidden;">Get PNR Staus</span>
-                    </div>
+                    
                 </div>
             </div>
         </div>
