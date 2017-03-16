@@ -52,12 +52,34 @@ $(document).ready(function () {
             }
             return m;
         };
+
+        function pnrModel() {
+            var m = {
+                trainName: ko.observable("Rajdhani Express"),
+                pnrNo: ko.observable(""),
+                enableGetPNRStatus: ko.observable(false),
+                date: ko.observable("2/26/2017"),
+                from: ko.observable("JUC"),
+                to: ko.observable("ASR"),
+                passengers: ko.observableArray([{
+                    name: "varun",
+                    status: "CNF",
+                    seat: "A1"
+                },{
+                    name: "fdf",
+                    status: "NF",
+                    seat: "B25"
+                }])
+            }
+            return m;
+        };
         var model = {
             currentView: ko.observable(),
             cancelledTrains: ko.observableArray(),
             rescheduledTrains: ko.observableArray(),
             divertedTrains: ko.observableArray(),
-            runningStatusModel: runningStatusModel()
+            runningStatusModel: runningStatusModel(),
+            pnrModel: pnrModel()
         };
         model.views = ko.observableArray(["Running Status", "PNR Status", "Diverted Trains", "Rescheduled Trains", "Cancelled Trains"]);
 
@@ -82,12 +104,16 @@ $(document).ready(function () {
         model.runningStatusModel.enableGetRunningStatus = ko.computed(function () {
             return (model.runningStatusModel.runningTrainNo().length > 0);
         });
+        model.pnrModel.enableGetPNRStatus = ko.computed(function () {
+            return (model.pnrModel.pnrNo().length > 0);
+        });
 
         model.runningStatusModel.getRunningStatus = getRunningStatus.bind(model)
         model.getCancelledTrains = getCancelledTrains.bind(model)
         model.getDivertedTrains = getDivertedTrains.bind(model)
         model.getRescheduledTrains = getRescheduledTrains.bind(model)
         model.runningStatusModel.setRakeBasedData = setRakeBasedData;
+        model.pnrModel.getPNRStatus = getPNRStatus.bind(model);
 
         return model;
     }
@@ -106,7 +132,9 @@ $(document).ready(function () {
             model.runningTextCss("orange");
         }
     }
-
+    function getPNRStatus(m){
+        var model = m.pnrModel;
+    }
     function getRunningStatus(m) {
         var model = m.runningStatusModel;
         $("#overlay").show();
