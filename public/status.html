@@ -56,92 +56,92 @@
 </div>
 
 <div class="container-fluid mainContainer">
-    <div class="row">
-        <div class="span12">
+    
             <div data-bind="template: {name: currentView()}"></div>
-        </div>
+       
     </div>
 </div>
 
 <script type="text/html" id="Running Status">
-    <div class="row">
         <div class="row">
-            <div class="col-sm-4 col-xs-1"></div>
-            <div class="col-sm-4 col-xs-11">
-                <div class="input-group">
-                    <input type="text" class="text-center form-control"
-                           placeholder="Enter train name/number" maxlength="30"
+            <div class="col-lg-3 col-sm-3 col-xs-12 col-centered">
+                <form>
+                    <div class="input-group">
+                        <input style="font-size:20px;" type="text" class="text-center form-control"
+                           placeholder="Enter train number" maxlength="10"
                            data-bind="value:runningStatusModel.runningTrainNo, valueUpdate:'keyup'"/>
-                    <button class="btn btn-primary search-btn"
-                            data-bind="click:runningStatusModel.getRunningStatus, enable:runningStatusModel.enableGetRunningStatus">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
+                        <div class="input-group-btn">
+                          <button class="btn btn-primary search-btn"
+                                    data-bind="click:runningStatusModel.getRunningStatus, enable:runningStatusModel.enableGetRunningStatus">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                     </form>
                 </div><!-- /input-group -->
+               
             </div><!-- /.col-lg-4 -->
-            <div class="col-sm-4 col-xs-0"></div>
-        </div><!-- /.row -->
-
-        <div class="col-sm-8">
-            <div class="outerDiv">
-                <div style="text-align: center;">
-
-                    <h2 data-bind="text:runningStatusModel.trainName()"></h2>
-
-                    <div data-bind="if:runningStatusModel.currentStationStatus()" style="margin-bottom: 2%">
-                        <span data-bind="text:runningStatusModel.currentStationStatus()"></span>
-                    </div>
-
-                    <div data-bind="if:runningStatusModel.rakes().length>1">
-                        <div class="btn-group btn-group-sm" data-bind="  foreach: runningStatusModel.rakes"
-                             style="margin-bottom:2%" role="group" aria-label="...">
-                            <button type="button"
-                                    data-bind="text: $data.startDate, click:$parent.runningStatusModel.setRakeBasedData.bind(null, $data, $parent.runningStatusModel)"
-                                    class="btn btn-default"></button>
+        
+        <div class="row">
+            <div class="col-sm-1 col-xs-0"></div>
+            <div class="col-sm-6  outerDiv">
+                    <div style="text-align: center;">
+                        <h2 data-bind="text:runningStatusModel.trainName()"></h2>
+                        <div data-bind="if:runningStatusModel.currentStationStatus()" style="margin-bottom: 2%">
+                            <span data-bind="text:runningStatusModel.currentStationStatus()"></span>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3 col-xs-4">
-                            <div class="diamond" >
-                                 <div class="circle"><div class="rectangle">
-                                 <div data-bind="if:runningStatusModel.preStation"><span class="stationName" data-bind="text:runningStatusModel.preStation().stnCode"></span></div></div></div>
+
+                        <div data-bind="if:runningStatusModel.rakes().length>1">
+                            <div class="btn-group btn-group-sm" data-bind="  foreach: runningStatusModel.rakes"
+                                 style="margin-bottom:2%" role="group" aria-label="...">
+                                <button type="button"
+                                        data-bind="text: $data.startDate, click:$parent.runningStatusModel.setRakeBasedData.bind(null, $data, $parent.runningStatusModel)"
+                                        class="btn btn-default"></button>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-xs-4">
-                            <div class="">
-                                <img src="images/train.png" alt="" height="30"
-                                 data-bind="style: { 'padding-left': runningStatusModel.currentPosition() }"/>
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-4">
+                                <div class="diamond" >
+                                     <div class="circle"><div class="rectangle">
+                                     <div data-bind="if:runningStatusModel.preStation"><span class="stationName" data-bind="text:runningStatusModel.preStation().stnCode"></span></div></div></div>
+                                </div>
                             </div>
+                            <div class="col-sm-7 col-xs-4">
+                                <div class="text-left">
+                                    <img src="images/train.png" alt="" height="30"
+                                     data-bind="style: { 'padding-left': runningStatusModel.currentPosition() }"/>
+                                </div>
 
-                            <div class="track"></div>
-                            <span style="font-weight: bold;" data-bind="text:runningStatusModel.currentLocation()"></span>
+                                <div class="track"></div>
+                                <span style="font-weight: bold;" data-bind="text:runningStatusModel.currentLocation()"></span>
+                            </div>
+                           <div class="col-sm-3 col-xs-4">
+                                <div class="diamond">
+                                     <div class="circle"><div class="rectangle"><div data-bind="if:runningStatusModel.nextStation"><span class="stationName" data-bind="text:runningStatusModel.nextStation().stnCode"></span></div></div></div>
+                                </div>
+                            </div>
                         </div>
-                       <div class="col-sm-3 col-xs-4">
-                            <div class="diamond">
-                                 <div class="circle"><div class="rectangle"><div data-bind="if:runningStatusModel.nextStation"><span class="stationName" data-bind="text:runningStatusModel.nextStation().stnCode"></span></div></div></div>
+
+
+                        <div class="row" style="margin-top:20px">
+                             <div data-bind="if:runningStatusModel.preStation()" class="col-sm-4 bottom-div">
+                                <span>Dept </span><span data-bind="text:runningStatusModel.preStation().stnCode"></span><br><br>
+                                <span style="font-weight: bold" data-bind="text:runningStatusModel.preStation().actDep"></span>
+                            </div>
+                            <div data-bind="if:runningStatusModel.nextStation()" class="col-sm-4 bottom-div">
+                                <span>ETA at </span><span data-bind="text:runningStatusModel.nextStation().stnCode"></span><br><br>
+                                <span style="font-weight: bold" data-bind="text:runningStatusModel.nextStation().schArrTime"></span>
+                            </div>
+                            <div data-bind="css:runningStatusModel.runningTextCss, if:runningStatusModel.nextStation()" class="col-sm-4 bottom-div">
+                                <span data-bind="html:runningStatusModel.arrivalText()"></span>
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="row" style="margin-top:20px">
-                         <div data-bind="if:runningStatusModel.preStation()" class="col-sm-4 bottom-div">
-                            <span>Dept </span><span data-bind="text:runningStatusModel.preStation().stnCode"></span><br><br>
-                            <span style="font-weight: bold" data-bind="text:runningStatusModel.preStation().actDep"></span>
-                        </div>
-                        <div data-bind="if:runningStatusModel.nextStation()" class="col-sm-4 bottom-div">
-                            <span>ETA at </span><span data-bind="text:runningStatusModel.nextStation().stnCode"></span><br><br>
-                            <span style="font-weight: bold" data-bind="text:runningStatusModel.nextStation().schArrTime"></span>
-                        </div>
-                        <div data-bind="css:runningStatusModel.runningTextCss, if:runningStatusModel.nextStation()" class="col-sm-4 bottom-div">
-                            <span data-bind="html:runningStatusModel.arrivalText()"></span>
-                        </div>
-                    </div>
-                </div>
+              
             </div>
-        </div>
 
-        <div data-bind="template: {name: 'rightContainer'}" class="col-sm-4 rightContainer">
-        </div>
+        <div data-bind="template: {name: 'rightContainer'}" class="col-sm-5 rightContainer"></div>
     </div>
 </script>
 <script type="text/html" id="PNR Status">
@@ -362,6 +362,7 @@
     <h2 class="updatesTitle">For min-by-min updates<br>Download</h2>
     <div><a href="http://play.google.com/store/apps/details?id=com.idr.trvlr.app&hl=en"><img src="images/googlePay.png" alt=""></a></div>
     <div><a href="http://itunes.apple.com/lb/app/truecaller-caller-id-number/com.idr.trvlr.app?mt=8"><img src="images/appStore.png" alt=""></a></div>
+
 </script>
 </body>
 </html>

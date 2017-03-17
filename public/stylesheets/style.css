@@ -152,10 +152,11 @@ input {
     color: white;
 }
 .outerDiv {
-    padding: 0% 15% 10% 15%;
+    margin-top: 50px;
+    margin-bottom: 50px;
     border-right: 0.5px solid #be9e9e;
-    margin-top: 7%;
-    margin-bottom: 5%;
+    padding: 0% 5% 0% 5%;
+    
 }
 .cancelledOuterDiv {
     padding: 0% 15% 10% 15%;
@@ -179,13 +180,11 @@ input {
     background-image: url("../images/track.png");
     height: 49px;
     margin-top: -5px;
-    min-width: 235%;
+    width: 141%;
+    margin-left: -20%;
     
 }
 
-.col-sm-6 .track{
-    margin-left: -64%;
-}
 
 .bottom-div {
     border: 1px solid black;
@@ -304,4 +303,18 @@ input {
 }
 .pnrStatus div {
     margin-top: 10px;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.liveStatus a{
+  color: white;
+}
+
+.carousel-inner img {
+    display: block;
+    margin: 0 auto;
 }

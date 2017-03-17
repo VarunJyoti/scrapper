@@ -35,7 +35,7 @@ function outer1() {
                                 }
                                 tempName = split[1];
                             }
-                            console.log("-----");
+                            
                         }
                     });
                     if (count > 2) {
@@ -43,16 +43,16 @@ function outer1() {
                             tempName = tempName.substring(1, tempName.length - 2);
                         }
                         gotName = tempName;
-                        console.log("GOT kEY:" + gotName);
+                      
                     }
                     parsedHTML('input').filter(function () {
                         var data = parsedHTML(this);
                         var name = $(data).attr('name')
                         var value = $(data).attr('value');
-                        console.log("input:" + name + ":" + value);
+                        
                         if (name === gotName) {
                             gotValue = value;
-                            console.log("GOT VAL:" + gotValue);
+                           
                         }
                     });
 
@@ -67,7 +67,7 @@ function outer1() {
             if (cookieArray) {
                 cookieArray.forEach(
                     function (cookiestr) {
-                        console.log("COOKIE:" + cookiestr);
+                        
                         request.cookie(cookiestr);
                     }
                 );
@@ -78,10 +78,8 @@ function outer1() {
 
         function getTrainData() {
             if (gotName && gotValue && gotName.length == 10 && gotValue.length == 10) {
-                console.log(gotName + "=" + gotValue);
-
                 var url = 'http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&' + gotName + '=' + gotValue;
-                console.log(url);
+               
 
                 request({
                     uri: url,
