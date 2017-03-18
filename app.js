@@ -8,10 +8,13 @@ var scrapping = require('./routes/scrapping');
 var cancelled = require('./routes/cancelled');
 var diverted = require('./routes/diverted');
 var rescheduled = require('./routes/rescheduled');
-
+var apicache = require("apicache");
 var index = require('./routes/index');
 
 var app = express();
+var cache = apicache.middleware;
+ 
+app.use(cache('10 minutes'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

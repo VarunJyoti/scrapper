@@ -19,8 +19,7 @@
 </head>
 <body id="root">
 <div id="overlay">
-    <img src="/images/loader.gif" alt="Loading" /><br/>
-    Loading...
+    <img src="/images/loader.gif" alt="Loading" />
 </div>
 <div class="container-fluid">
     <div class="row">
@@ -63,29 +62,28 @@
 </div>
 
 <script type="text/html" id="Running Status">
-        <div class="row">
-            <div class="col-lg-3 col-sm-3 col-xs-12 col-centered">
-                <form>
+        <div class="row search">
+          <div class="col-sm-2 col-sm-offset-5 col-md-2 col-md-offset-5 col-xs-6 col-xs-offset-0">
+            <form role="form">
                     <div class="input-group">
-                        <input style="font-size:20px;" type="text" class="text-center form-control"
-                           placeholder="Enter train number" maxlength="10"
-                           data-bind="value:runningStatusModel.runningTrainNo, valueUpdate:'keyup'"/>
-                        <div class="input-group-btn">
+                          <input style="font-size:20px;" type="text" class="text-center input-sm form-control" placeholder="Enter train number" maxlength="10"        data-bind="value:runningStatusModel.runningTrainNo, valueUpdate:'keyup'"/>
+
+                      <span class="input-group-btn">
                           <button class="btn btn-primary search-btn"
-                                    data-bind="click:runningStatusModel.getRunningStatus, enable:runningStatusModel.enableGetRunningStatus">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </div>
+                                data-bind="click:runningStatusModel.getRunningStatus, enable:runningStatusModel.enableGetRunningStatus">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+
+                      </span>
                     </div>
-                    
-                     </form>
-                </div><!-- /input-group -->
-               
-            </div><!-- /.col-lg-4 -->
+            </form>
+          </div>
+        </div>
+        
         
         <div class="row">
             <div class="col-sm-1 col-xs-0"></div>
-            <div class="col-sm-6  outerDiv">
+            <div class="col-sm-6 outerDiv" data-bind="visible:runningStatusModel.currentPosition()">
                     <div style="text-align: center;">
                         <h2 data-bind="text:runningStatusModel.trainName()"></h2>
                         <div data-bind="if:runningStatusModel.currentStationStatus()" style="margin-bottom: 2%">
@@ -139,6 +137,10 @@
                         </div>
                     </div>
               
+            </div>
+
+            <div class="col-sm-6 outerDiv noDataDisplayed" data-bind="visible:!runningStatusModel.currentPosition()">
+                Train status will be displayed here
             </div>
 
         <div data-bind="template: {name: 'rightContainer'}" class="col-sm-5 rightContainer"></div>

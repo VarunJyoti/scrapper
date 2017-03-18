@@ -53,7 +53,7 @@ $(document).ready(function () {
             runningStatusModel: runningStatusModel(),
             pnrModel: pnrModel()
         };
-        model.views = ko.observableArray(["Running Status", "PNR Status", "Diverted Trains", "Rescheduled Trains", "Cancelled Trains"]);
+        model.views = ko.observableArray(["Running Status", "Diverted Trains", "Rescheduled Trains", "Cancelled Trains"]);
 
         /* model.show_Contact = ko.computed(function () {
          return model.currentView() === "Running Status" ? true : false;

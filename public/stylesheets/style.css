@@ -152,7 +152,7 @@ input {
     color: white;
 }
 .outerDiv {
-    margin-top: 50px;
+    margin-top: 10px;
     margin-bottom: 50px;
     border-right: 0.5px solid #be9e9e;
     padding: 0% 5% 0% 5%;
@@ -168,7 +168,7 @@ input {
     color: gray;
 }
 .rightContainer{
-    margin-top:50px;
+    margin-top:10px;
     text-align: center;
 }
 
@@ -317,4 +317,12 @@ input {
 .carousel-inner img {
     display: block;
     margin: 0 auto;
+}
+
+.noDataDisplayed {
+    text-align: center;
+    padding-top: 50px;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
 }
