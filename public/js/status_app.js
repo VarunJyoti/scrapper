@@ -20,7 +20,8 @@ $(document).ready(function () {
                 distanceToCover: ko.observable(0),
                 arrivalText: ko.observable(""),
                 runningTextCss: ko.observable(""),
-                rakes: ko.observableArray()
+                rakes: ko.observableArray(),
+                runningStatusLoaded:ko.observable(false)
             }
             return m;
         };
@@ -83,6 +84,8 @@ $(document).ready(function () {
                     break;
                 case "Cancelled Trains":
                     getCancelledTrains(model);
+                    break;
+                case "Running Status":
                     break
 
                 default:
@@ -128,6 +131,7 @@ $(document).ready(function () {
 
     function getRunningStatus(m) {
         var model = m.runningStatusModel;
+        model.runningStatusLoaded(false)
         $("#overlay").show();
         ajaxCall("/scrapping/" + model.runningTrainNo(),
             function (data) {
@@ -137,6 +141,7 @@ $(document).ready(function () {
                 model.trainName(model.runningTrainNo() + " " + data[0].trainName);
                 var rake = runningData.rakes[0];
                 setRakeBasedData(rake, model);
+                model.runningStatusLoaded(true)
             },
             function () {
                 alert("Train number incorrect or Server too busy. Please try after some time.");

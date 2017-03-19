@@ -65,7 +65,7 @@
         <div class="row search">
           <div class="col-sm-2 col-sm-offset-5 col-md-2 col-md-offset-5 col-xs-6 col-xs-offset-0">
             <form role="form">
-                    <div class="input-group">
+                    <div class="input-group" data-bind="style: {'padding-top' : runningStatusModel.runningStatusLoaded()? 'inherit':'50%'}" >
                           <input style="font-size:20px;" type="text" class="text-center input-sm form-control" placeholder="Enter train number"
                                  maxlength="5" data-bind="value:runningStatusModel.runningTrainNo, valueUpdate:'keyup'"/>
 
@@ -81,8 +81,7 @@
           </div>
         </div>
         
-        
-        <div class="row">
+        <div class="row" data-bind="style:{'visibility': runningStatusModel.runningStatusLoaded()? 'visible':'hidden'}">
             <div class="col-sm-1 col-xs-0"></div>
             <div class="col-sm-6 outerDiv" data-bind="visible:runningStatusModel.currentPosition()">
                     <div style="text-align: center;">
