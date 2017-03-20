@@ -2,6 +2,7 @@ body {
     padding: 0px;
     Margin: 0px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-image: url("../images/bg2.png")
 }
 
 input {
@@ -121,7 +122,7 @@ input {
 .cancelledList {
     font-size: 11px;
     min-height: 150px;
-    max-height: 350px;
+    max-height: 250px;
     overflow-y: scroll;
     overflow-x: hidden;
     padding: 2.7%;
@@ -161,7 +162,6 @@ input {
 .cancelledOuterDiv {
     padding: 0% 15% 10% 15%;
     border-right: 0.5px solid #be9e9e;
-    margin-top: 7%;
     margin-bottom: 5%;
 }
 .updatesTitle{
@@ -172,9 +172,6 @@ input {
     text-align: center;
 }
 
-.mainContainer{
-   background-image: url("../images/bg2.png")
-}
 
 .track {
     background-image: url("../images/track.png");
@@ -259,14 +256,13 @@ input {
     height: 100%;
     width: 100%;
     z-index: 5000;
-    top: 0;
-    left: 0;
     float: left;
     text-align: center;
     padding-top: 10%;
     opacity: 0.5;
     display: none;
 }
+
 .btn-default:active, .btn-default:focus{
     color: #fff;
     background-color: #337ab7;
@@ -285,6 +281,10 @@ input {
 
 .navbar-default .navbar-nav>li>a {
     color: white;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: #486FB5;
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
@@ -318,7 +318,11 @@ input {
     display: block;
     margin: 0 auto;
 }
-
+@media screen and (max-width: 763px) {
+    .carousel-inner img{
+        height: 200px!important;
+    }
+}
 .noDataDisplayed {
     text-align: center;
     padding-top: 50px;
@@ -364,4 +368,13 @@ input {
     -webkit-transform: none;
     transform: none;
     width: 20px;
+}
+
+.navbar-nav>li {
+    border-left: 1px lightgray solid;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.navbar-nav>li:first-child {
+    border:none;
 }

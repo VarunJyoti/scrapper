@@ -1,4 +1,9 @@
 $(document).ready(function () {
+     $('#fullpage').fullpage({
+         slideSelector: '.fullslide',
+         verticalCentered: false
+     });
+
     
     function viewModel() {
         var runningData = null;
@@ -107,6 +112,9 @@ $(document).ready(function () {
         model.getRescheduledTrains = getRescheduledTrains.bind(model)
         model.runningStatusModel.setRakeBasedData = setRakeBasedData;
         model.pnrModel.getPNRStatus = getPNRStatus.bind(model);
+        model.goToSecondSection = function(){
+            $.fn.fullpage.moveSectionDown();
+        }
 
         return model;
     }
@@ -136,6 +144,10 @@ $(document).ready(function () {
         ajaxCall("/scrapping/" + model.runningTrainNo(),
             function (data) {
                 $("#overlay").hide();
+                setTimeout(function(){
+                    $(".btn-group-sm .btn:first").focus();
+                }, 100);
+                
                 runningData = data[0];
                 model.rakes(runningData.rakes);
                 model.trainName(model.runningTrainNo() + " " + data[0].trainName);
@@ -153,6 +165,7 @@ $(document).ready(function () {
         var toStation = runningData.to;
         var isFound = false;
         var preStation = rake.stations[0];
+        
         $.each(rake.stations, function (index, st) {
             if (isFound && st.stoppingStn) {
                 // find next stopping station
@@ -290,386 +303,3 @@ $(document).ready(function () {
     }).run('#Running Status');
 })
 
-function getData123() {
-    return [{
-        "trainDataFound": "trainRunningDataFound",
-        "trainNo": "12241",
-        "trainName": "CDG-ASR SUPERFAST",
-        "from": "CDG",
-        "to": "ASR",
-        "schArrTime": "21:25",
-        "schDepTime": "17:10",
-        "dayCnt": 0,
-        "runsOn": "1111111",
-        "trainType": "SUF",
-        "prfFlag": "0",
-        "vldFrm": "1 Oct 2016",
-        "vldTo": "-",
-        "trainSchedule": {
-            "stations": [{
-                "stnCode": "CDG",
-                "arrTime": "00:00",
-                "depTime": "17:10",
-                "dayCnt": 0,
-                "distance": 0,
-                "pfNo": 0
-            }, {
-                "stnCode": "SASN",
-                "arrTime": "17:20",
-                "depTime": "17:22",
-                "dayCnt": 0,
-                "distance": 11,
-                "pfNo": 0
-            }, {
-                "stnCode": "LDH",
-                "arrTime": "18:52",
-                "depTime": "18:57",
-                "dayCnt": 0,
-                "distance": 112,
-                "pfNo": 0
-            }, {
-                "stnCode": "JUC",
-                "arrTime": "19:48",
-                "depTime": "19:53",
-                "dayCnt": 0,
-                "distance": 169,
-                "pfNo": 0
-            }, {
-                "stnCode": "BEAS",
-                "arrTime": "20:28",
-                "depTime": "20:30",
-                "dayCnt": 0,
-                "distance": 205,
-                "pfNo": 0
-            }, {"stnCode": "ASR", "arrTime": "21:25", "depTime": "00:00", "dayCnt": 0, "distance": 247, "pfNo": 0}]
-        },
-        "rakes": [{
-            "startDate": "14 Mar 2017",
-            "startDayDiff": "0",
-            "departed": true,
-            "curStn": "HMR",
-            "terminated": false,
-            "idMsg": "0",
-            "cncldFrmStn": "null",
-            "cncldToStn": "null",
-            "totalJourney": "3 hrs 20 min",
-            "lastUpdated": "14 Mar 2017 20:42",
-            "stations": [{
-                "stnCode": "CDG",
-                "actArr": "00:00",
-                "actDep": "17:10",
-                "dayCnt": 0,
-                "schArrTime": "00:00",
-                "schDepTime": "17:10",
-                "schDayCnt": 0,
-                "delayArr": 0,
-                "delayDep": 0,
-                "arr": false,
-                "dep": true,
-                "distance": 0,
-                "journeyDate": "14 Mar 2017",
-                "actArrDate": "14 Mar 2017",
-                "actDepDate": "14 Mar 2017",
-                "dayDiff": "0",
-                "stoppingStn": true,
-                "dvrtdStn": false,
-                "travelled": true,
-                "updWaitngArr": false,
-                "updWaitngDep": false,
-                "pfNo": 0
-            }, {
-                "stnCode": "SASN",
-                "actArr": "17:25",
-                "actDep": "17:27",
-                "dayCnt": 0,
-                "schArrTime": "17:20",
-                "schDepTime": "17:22",
-                "schDayCnt": 0,
-                "delayArr": 5,
-                "delayDep": 5,
-                "arr": true,
-                "dep": true,
-                "distance": 11,
-                "journeyDate": "14 Mar 2017",
-                "actArrDate": "14 Mar 2017",
-                "actDepDate": "14 Mar 2017",
-                "dayDiff": "0",
-                "stoppingStn": true,
-                "dvrtdStn": false,
-                "travelled": true,
-                "updWaitngArr": false,
-                "updWaitngDep": false,
-                "pfNo": 0
-            }, {
-                "stnCode": "LDH",
-                "actArr": "19:08",
-                "actDep": "19:21",
-                "dayCnt": 0,
-                "schArrTime": "18:52",
-                "schDepTime": "18:57",
-                "schDayCnt": 0,
-                "delayArr": 16,
-                "delayDep": 24,
-                "arr": true,
-                "dep": true,
-                "distance": 112,
-                "journeyDate": "14 Mar 2017",
-                "actArrDate": "14 Mar 2017",
-                "actDepDate": "14 Mar 2017",
-                "dayDiff": "0",
-                "stoppingStn": true,
-                "dvrtdStn": false,
-                "travelled": true,
-                "updWaitngArr": false,
-                "updWaitngDep": false,
-                "pfNo": 5
-            }, {
-                "stnCode": "JUC",
-                "actArr": "20:09",
-                "actDep": "20:14",
-                "dayCnt": 0,
-                "schArrTime": "19:48",
-                "schDepTime": "19:53",
-                "schDayCnt": 0,
-                "delayArr": 21,
-                "delayDep": 21,
-                "arr": true,
-                "dep": true,
-                "distance": 169,
-                "journeyDate": "14 Mar 2017",
-                "actArrDate": "14 Mar 2017",
-                "actDepDate": "14 Mar 2017",
-                "dayDiff": "0",
-                "stoppingStn": true,
-                "dvrtdStn": false,
-                "travelled": true,
-                "updWaitngArr": false,
-                "updWaitngDep": false,
-                "pfNo": 0
-            }, {
-                "stnCode": "HMR",
-                "actArr": "20:30",
-                "actDep": "20:30",
-                "dayCnt": 0,
-                "schArrTime": "20:14",
-                "schDepTime": "20:14",
-                "schDayCnt": 0,
-                "delayArr": 16,
-                "delayDep": 16,
-                "arr": true,
-                "dep": true,
-                "distance": 190,
-                "journeyDate": "14 Mar 2017",
-                "actArrDate": "14 Mar 2017",
-                "actDepDate": "14 Mar 2017",
-                "dayDiff": "0",
-                "stoppingStn": false,
-                "dvrtdStn": false,
-                "travelled": true,
-                "updWaitngArr": false,
-                "updWaitngDep": false,
-                "pfNo": 0
-            }, {
-                "stnCode": "BEAS",
-                "actArr": "20:39",
-                "actDep": "20:40",
-                "dayCnt": 0,
-                "schArrTime": "20:28",
-                "schDepTime": "20:30",
-                "schDayCnt": 0,
-                "delayArr": 11,
-                "delayDep": 10,
-                "arr": false,
-                "dep": false,
-                "distance": 205,
-                "journeyDate": "14 Mar 2017",
-                "actArrDate": "14 Mar 2017",
-                "actDepDate": "14 Mar 2017",
-                "dayDiff": "0",
-                "stoppingStn": true,
-                "dvrtdStn": false,
-                "travelled": true,
-                "updWaitngArr": false,
-                "updWaitngDep": false,
-                "pfNo": 0
-            }, {
-                "stnCode": "ASR",
-                "actArr": "21:25",
-                "actDep": "00:00",
-                "dayCnt": 0,
-                "schArrTime": "21:25",
-                "schDepTime": "00:00",
-                "schDayCnt": 0,
-                "delayArr": 0,
-                "delayDep": 0,
-                "arr": false,
-                "dep": false,
-                "distance": 247,
-                "journeyDate": "14 Mar 2017",
-                "actArrDate": "14 Mar 2017",
-                "actDepDate": "",
-                "dayDiff": "0",
-                "stoppingStn": true,
-                "dvrtdStn": false,
-                "travelled": true,
-                "updWaitngArr": false,
-                "updWaitngDep": false,
-                "pfNo": 0
-            }],
-            "totalLateMins": 21,
-            "isRunningDataAvailable": true
-        }, {
-            "startDate": "13 Mar 2017",
-            "startDayDiff": "-1",
-            "departed": true,
-            "curStn": "ASR",
-            "terminated": true,
-            "idMsg": "0",
-            "cncldFrmStn": "null",
-            "cncldToStn": "null",
-            "totalJourney": "3 hrs 55 min",
-            "lastUpdated": "13 Mar 2017 21:10",
-            "stations": [{
-                "stnCode": "CDG",
-                "actArr": "00:00",
-                "actDep": "17:10",
-                "dayCnt": 0,
-                "schArrTime": "00:00",
-                "schDepTime": "17:10",
-                "schDayCnt": 0,
-                "delayArr": 0,
-                "delayDep": 0,
-                "arr": false,
-                "dep": true,
-                "distance": 0,
-                "journeyDate": "13 Mar 2017",
-                "actArrDate": "13 Mar 2017",
-                "actDepDate": "13 Mar 2017",
-                "dayDiff": "-1",
-                "stoppingStn": true,
-                "dvrtdStn": false,
-                "travelled": true,
-                "updWaitngArr": false,
-                "updWaitngDep": false,
-                "pfNo": 0
-            }, {
-                "stnCode": "SASN",
-                "actArr": "17:25",
-                "actDep": "17:27",
-                "dayCnt": 0,
-                "schArrTime": "17:20",
-                "schDepTime": "17:22",
-                "schDayCnt": 0,
-                "delayArr": 5,
-                "delayDep": 5,
-                "arr": true,
-                "dep": true,
-                "distance": 11,
-                "journeyDate": "13 Mar 2017",
-                "actArrDate": "13 Mar 2017",
-                "actDepDate": "13 Mar 2017",
-                "dayDiff": "-1",
-                "stoppingStn": true,
-                "dvrtdStn": false,
-                "travelled": true,
-                "updWaitngArr": false,
-                "updWaitngDep": false,
-                "pfNo": 0
-            }, {
-                "stnCode": "LDH",
-                "actArr": "18:52",
-                "actDep": "19:02",
-                "dayCnt": 0,
-                "schArrTime": "18:52",
-                "schDepTime": "18:57",
-                "schDayCnt": 0,
-                "delayArr": 0,
-                "delayDep": 5,
-                "arr": true,
-                "dep": true,
-                "distance": 112,
-                "journeyDate": "13 Mar 2017",
-                "actArrDate": "13 Mar 2017",
-                "actDepDate": "13 Mar 2017",
-                "dayDiff": "-1",
-                "stoppingStn": true,
-                "dvrtdStn": false,
-                "travelled": true,
-                "updWaitngArr": false,
-                "updWaitngDep": false,
-                "pfNo": 5
-            }, {
-                "stnCode": "JUC",
-                "actArr": "19:47",
-                "actDep": "19:53",
-                "dayCnt": 0,
-                "schArrTime": "19:48",
-                "schDepTime": "19:53",
-                "schDayCnt": 0,
-                "delayArr": -1,
-                "delayDep": 0,
-                "arr": true,
-                "dep": true,
-                "distance": 169,
-                "journeyDate": "13 Mar 2017",
-                "actArrDate": "13 Mar 2017",
-                "actDepDate": "13 Mar 2017",
-                "dayDiff": "-1",
-                "stoppingStn": true,
-                "dvrtdStn": false,
-                "travelled": true,
-                "updWaitngArr": false,
-                "updWaitngDep": false,
-                "pfNo": 0
-            }, {
-                "stnCode": "BEAS",
-                "actArr": "20:20",
-                "actDep": "20:30",
-                "dayCnt": 0,
-                "schArrTime": "20:28",
-                "schDepTime": "20:30",
-                "schDayCnt": 0,
-                "delayArr": -8,
-                "delayDep": 0,
-                "arr": true,
-                "dep": true,
-                "distance": 205,
-                "journeyDate": "13 Mar 2017",
-                "actArrDate": "13 Mar 2017",
-                "actDepDate": "13 Mar 2017",
-                "dayDiff": "-1",
-                "stoppingStn": true,
-                "dvrtdStn": false,
-                "travelled": true,
-                "updWaitngArr": false,
-                "updWaitngDep": false,
-                "pfNo": 0
-            }, {
-                "stnCode": "ASR",
-                "actArr": "21:05",
-                "actDep": "00:00",
-                "dayCnt": 0,
-                "schArrTime": "21:25",
-                "schDepTime": "00:00",
-                "schDayCnt": 0,
-                "delayArr": -20,
-                "delayDep": 0,
-                "arr": true,
-                "dep": false,
-                "distance": 247,
-                "journeyDate": "13 Mar 2017",
-                "actArrDate": "13 Mar 2017",
-                "actDepDate": "",
-                "dayDiff": "-1",
-                "stoppingStn": true,
-                "dvrtdStn": false,
-                "travelled": true,
-                "updWaitngArr": false,
-                "updWaitngDep": false,
-                "pfNo": 0
-            }],
-            "totalLateMins": -20,
-            "isRunningDataAvailable": true
-        }]
-    }]
-}
