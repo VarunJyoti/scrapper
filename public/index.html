@@ -10,6 +10,7 @@
     <title>Trvlr</title>
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="./js/sammy.js"></script>
+    <script type="text/javascript" src="js/overflow.js"></script> 
     <script type="text/javascript" src="js/fullPage.js"></script>
     <script type="text/javascript" src="js/knockout-3.4.1.js"></script>
     <script type="text/javascript" src="js/status_app.js"></script>
@@ -30,22 +31,8 @@
             </div>
             <div class="container-fluid mainContainer">
                 <div class="row">
-                    <div class="col-sm-8" style="text-align: center">
-                        <div class="row">
-                            <div class="col-sm-2"></div>
-                            <div class="col-sm-10 introText">
-                                Indian Railways ka running status ab aapki jeb me.......
-                            </div>
-                        </div>
-                        <div class="row btnRow">
-                            <div class="col-sm-2"></div>
-                            <div class="col-sm-6">
-                                <a href="http://play.google.com/store/apps/details?id=com.idr.trvlr.app&hl=en"><img src="images/googlePay.png" alt=""></a>
-                            </div>
-                            <div class="col-sm-3">
-                                <a href="http://itunes.apple.com/lb/app/truecaller-caller-id-number/com.idr.trvlr.app?mt=8"><img src="images/appStore.png" alt=""></a>
-                            </div>
-                        </div>
+                    <div class="col-sm-8 introText" style="text-align: center">
+                        Indian Railways ka running status ab aapki jeb me.......
                     </div>
                     <div class="col-sm-2" style="padding-top: 4%">
                         <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -66,6 +53,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="row" style="text-align: center">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-2">
+                        <a href="http://play.google.com/store/apps/details?id=com.idr.trvlr.app&hl=en"><img src="images/googlePay.png" alt=""></a>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="http://itunes.apple.com/lb/app/truecaller-caller-id-number/com.idr.trvlr.app?mt=8"><img src="images/appStore.png" alt=""></a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="section">
@@ -74,9 +70,7 @@
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-4   col-xs-4"></div>
-                    <div class="col-sm-4  col-xs-4 text-center"><img class="logo" src="images/logo.png"></div>
-                    <div class="col-sm-4  col-xs-4"></div>
+                    
                 </div>
             </div>
             <div class="container-fluid">
@@ -107,9 +101,9 @@
             </div>
             <script type="text/html" id="Running Status">
                 <div class="row search">
-                    <div class="col-lg-2 col-lg-offset-4 col-sm-2 col-sm-offset-4 col-md-2 col-md-offset-4 col-xs-6 col-xs-offset-0">
+                    <div class="col-lg-2 col-lg-offset-4 col-sm-2 col-sm-offset-4 col-md-2 col-md-offset-4 col-xs-6 col-xs-offset-0 text-center">
                         <form role="form">
-                            <div class="input-group" data-bind="style: {'padding-top' : runningStatusModel.runningStatusLoaded()? 'inherit':'50%'}">
+                            <div class="input-group" data-bind="style: {'padding-top' : runningStatusModel.runningStatusLoaded()? 'inherit':'70%'}">
                                 <input style="font-size:20px;" type="text" class="text-center input-sm form-control" placeholder="Enter train number" maxlength="5" data-bind="value:runningStatusModel.runningTrainNo, valueUpdate:'keyup'" />
                                 <span class="input-group-btn">
                           <button class="btn btn-primary search-btn"
@@ -132,7 +126,7 @@
                             </div>
                             <div data-bind="if:runningStatusModel.rakes().length>1">
                                 <div class="btn-group btn-group-sm" data-bind="  foreach: runningStatusModel.rakes" style="margin-bottom:2%" role="group" aria-label="...">
-                                    <button type="button" data-bind="text: $data.startDate, click:$parent.runningStatusModel.setRakeBasedData.bind(null, $data, $parent.runningStatusModel)" class="btn btn-default"></button>
+                                    <button type="button" data-bind="text: $data.startDate, click:$parent.runningStatusModel.setRakeBasedData.bind(null, $data, $parent.runningStatusModel, $index())" class="btn btn-default"></button>
                                 </div>
                             </div>
                             <div class="row">
@@ -248,9 +242,7 @@
                     <div class="col-sm-8">
                         <div class="cancelledOuterDiv">
                             <div style="text-align: center;">
-                                
                                 <h2>Diverted Trains</h2>
-                                
                                 <div style="padding: 0% 3%">
                                     <div class="row">
                                         <div class="col-sm-6 col-xs-6" style="text-align: left;padding-left:4%;">
@@ -273,7 +265,6 @@
                                         </div>
                                     </div>
                                 </div>
-                               
                             </div>
                         </div>
                     </div>
@@ -286,9 +277,7 @@
                     <div class="col-sm-8">
                         <div class="cancelledOuterDiv">
                             <div style="text-align: center;">
-                                
-                                    <h2>Rescheduled Trains</h2>
-                                
+                                <h2>Rescheduled Trains</h2>
                                 <div style="padding: 0% 3%">
                                     <div class="row">
                                         <div class="col-sm-4 col-xs-4" style="text-align: left;padding-left:4%;">
@@ -311,7 +300,6 @@
                                         </div>
                                     </div>
                                 </div>
-                               
                             </div>
                         </div>
                     </div>
@@ -324,9 +312,7 @@
                     <div class="col-sm-8">
                         <div class="cancelledOuterDiv">
                             <div style="text-align: center;">
-                                
-                                    <h2>Cancelled Status</h2>
-                                
+                                <h2>Cancelled Status</h2>
                                 <div style="padding: 0% 3%">
                                     <div class="row">
                                         <div class="col-sm-5 col-xs-5" style="text-align: left;padding-left:4%;">
@@ -349,7 +335,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
                         </div>
                     </div>

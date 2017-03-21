@@ -1,10 +1,12 @@
-$(document).ready(function () {
-     $('#fullpage').fullpage({
-         slideSelector: '.fullslide',
-         verticalCentered: false
-     });
+$(document).ready(function() {
+    $('#fullpage').fullpage({
+        slideSelector: '.fullslide',
+        verticalCentered: false,
+        scrollOverflow: false,
+        //responsive: 1024 
+    });
+    $.fn.fullpage.setResponsive(true);
 
-    
     function viewModel() {
         var runningData = null;
 
@@ -26,7 +28,7 @@ $(document).ready(function () {
                 arrivalText: ko.observable(""),
                 runningTextCss: ko.observable(""),
                 rakes: ko.observableArray(),
-                runningStatusLoaded:ko.observable(false)
+                runningStatusLoaded: ko.observable(false)
             }
             return m;
         };
@@ -43,7 +45,7 @@ $(document).ready(function () {
                     name: "varun",
                     status: "CNF",
                     seat: "A1"
-                },{
+                }, {
                     name: "fdf",
                     status: "NF",
                     seat: "B25"
@@ -61,24 +63,24 @@ $(document).ready(function () {
         };
         model.views = ko.observableArray(["Running Status", "Diverted Trains", "Rescheduled Trains", "Cancelled Trains"]);
 
-       /* model.show_Contact = ko.computed(function () {
-            return model.currentView() === "Running Status" ? true : false;
+        /* model.show_Contact = ko.computed(function () {
+             return model.currentView() === "Running Status" ? true : false;
 
-        });
-        model.show_Home = ko.computed(function () {
-            return model.currentView() === "PNR Status" ? true : false;
-        });
-        model.show_About = ko.computed(function () {
-            return model.currentView() === "Diverted Trains" ? true : false;
-        });
-        model.show_About = ko.computed(function () {
-            return model.currentView() === "Rescheduled Trains" ? true : false;
-        });
-        model.show_About = ko.computed(function () {
-            return model.currentView() === "Cancelled Trains" ? true : false;
-        });*/
+         });
+         model.show_Home = ko.computed(function () {
+             return model.currentView() === "PNR Status" ? true : false;
+         });
+         model.show_About = ko.computed(function () {
+             return model.currentView() === "Diverted Trains" ? true : false;
+         });
+         model.show_About = ko.computed(function () {
+             return model.currentView() === "Rescheduled Trains" ? true : false;
+         });
+         model.show_About = ko.computed(function () {
+             return model.currentView() === "Cancelled Trains" ? true : false;
+         });*/
 
-        ko.computed(function () {
+        ko.computed(function() {
             var cv = model.currentView();
             switch (cv) {
                 case "Diverted Trains":
@@ -99,10 +101,10 @@ $(document).ready(function () {
         });
 
 
-        model.runningStatusModel.enableGetRunningStatus = ko.computed(function () {
+        model.runningStatusModel.enableGetRunningStatus = ko.computed(function() {
             return (model.runningStatusModel.runningTrainNo().length > 0);
         });
-        model.pnrModel.enableGetPNRStatus = ko.computed(function () {
+        model.pnrModel.enableGetPNRStatus = ko.computed(function() {
             return (model.pnrModel.pnrNo().length > 0);
         });
 
@@ -112,7 +114,7 @@ $(document).ready(function () {
         model.getRescheduledTrains = getRescheduledTrains.bind(model)
         model.runningStatusModel.setRakeBasedData = setRakeBasedData;
         model.pnrModel.getPNRStatus = getPNRStatus.bind(model);
-        model.goToSecondSection = function(){
+        model.goToSecondSection = function() {
             $.fn.fullpage.moveSectionDown();
         }
 
@@ -133,7 +135,8 @@ $(document).ready(function () {
             model.runningTextCss("orange");
         }
     }
-    function getPNRStatus(m){
+
+    function getPNRStatus(m) {
         var model = m.pnrModel;
     }
 
@@ -142,31 +145,33 @@ $(document).ready(function () {
         model.runningStatusLoaded(false)
         $("#overlay").show();
         ajaxCall("/scrapping/" + model.runningTrainNo(),
-            function (data) {
+            function(data) {
                 $("#overlay").hide();
-                setTimeout(function(){
-                    $(".btn-group-sm .btn:first").focus();
-                }, 100);
-                
                 runningData = data[0];
                 model.rakes(runningData.rakes);
                 model.trainName(model.runningTrainNo() + " " + data[0].trainName);
                 var rake = runningData.rakes[0];
-                setRakeBasedData(rake, model);
+                setRakeBasedData(rake, model, 0);
                 model.runningStatusLoaded(true)
+
+                
             },
-            function () {
+            function() {
                 alert("Train number incorrect or Server too busy. Please try after some time.");
                 $("#overlay").hide();
             });
     }
 
-    function setRakeBasedData(rake, model) {
+    function setRakeBasedData(rake, model, index) {
         var toStation = runningData.to;
         var isFound = false;
         var preStation = rake.stations[0];
-        
-        $.each(rake.stations, function (index, st) {
+        $(".btn-group-sm .btn").each(function() {
+            $(this).removeClass("selected");
+        })
+        $(".btn-group-sm .btn:nth(" + index + ")").addClass("selected");
+
+        $.each(rake.stations, function(index, st) {
             if (isFound && st.stoppingStn) {
                 // find next stopping station
                 model.nextStation(st);
@@ -190,22 +195,19 @@ $(document).ready(function () {
         model.preStation(preStation)
 
 
-        model.currentLocation(( model.nextStation().distance - model.preStation().distance) + " Kms from " + model.nextStation().stnCode);
+        model.currentLocation((model.nextStation().distance - model.preStation().distance) + " Kms from " + model.nextStation().stnCode);
 
         model.currentStationStatus("Not yet departed from " + model.currentStation().stnCode);
         if (model.currentStation().stnCode == model.preStation().stnCode) {
             model.currentPosition("0%")
-        }
-        else if (model.currentStation().stnCode == model.nextStation().stnCode) {
+        } else if (model.currentStation().stnCode == model.nextStation().stnCode) {
             model.currentPosition("99%")
             model.currentLocation("");
             model.currentStationStatus("Arrived at " + model.currentStation().stnCode)
-        }
-        else if (model.currentStation().dep) {
+        } else if (model.currentStation().dep) {
             model.currentPosition("75%");
             model.currentStationStatus("Departed from " + model.currentStation().stnCode)
-        }
-        else if (model.currentStation().arr){
+        } else if (model.currentStation().arr) {
             model.currentPosition("50%")
         } else {
             model.currentPosition("25%")
@@ -217,9 +219,9 @@ $(document).ready(function () {
     function getCancelledTrains(m) {
         m.cancelledTrains([])
         $("#overlay").show();
-        ajaxCall("/getCancelled", function (data) {
+        ajaxCall("/getCancelled", function(data) {
             $("#overlay").hide();
-            data.allCancelledTrains.forEach(function (ct) {
+            data.allCancelledTrains.forEach(function(ct) {
                 var t = {
                     startDate: ct.startDate,
                     trainDstn: ct.trainDstn,
@@ -236,9 +238,9 @@ $(document).ready(function () {
     function getDivertedTrains(m) {
         m.divertedTrains([]);
         $("#overlay").show();
-        ajaxCall("/getDiverted", function (data) {
+        ajaxCall("/getDiverted", function(data) {
             $("#overlay").hide();
-            data.trains.forEach(function (ct) {
+            data.trains.forEach(function(ct) {
                 var t = {
                     startDate: ct.startDate,
                     trainDstn: ct.trainDstn,
@@ -258,9 +260,9 @@ $(document).ready(function () {
         m.rescheduledTrains([]);
         $("#overlay").show();
         ajaxCall("/getRescheduled",
-            function (data) {
+            function(data) {
                 $("#overlay").hide();
-                data.trains.forEach(function (ct) {
+                data.trains.forEach(function(ct) {
                     var t = {
                         startDate: ct.startDate,
                         trainDstn: ct.trainDstn,
@@ -278,7 +280,7 @@ $(document).ready(function () {
             }, serverBusy);
     }
 
-    var serverBusy = function () {
+    var serverBusy = function() {
         alert("Server too busy. Please try after some time.");
         $("#overlay").hide();
     }
@@ -296,10 +298,9 @@ $(document).ready(function () {
     var vm = new viewModel();
 
     ko.applyBindings(vm, document.getElementById("root"));
-    Sammy(function () {
-        this.get('#:view', function () {
+    Sammy(function() {
+        this.get('#:view', function() {
             vm.currentView(this.params.view);
         });
     }).run('#Running Status');
 })
-
