@@ -19,6 +19,7 @@ $(document).ready(function() {
                 enableGetRunningStatus: ko.observable(false),
                 currentStation: ko.observable(),
                 currentStationStatus: ko.observable(),
+                stationFrom: ko.observable(),
                 preStation: ko.observable(),
                 nextStation: ko.observable(),
                 departed: ko.observable(""),
@@ -122,18 +123,23 @@ $(document).ready(function() {
     }
 
     function setArrivalText(model) {
-
         var delayArr = model.nextStation().delayArr;
         if (delayArr === 0) {
             model.arrivalText("ON <br><br>Time");
             model.runningTextCss("green");
         } else if (delayArr > 0) {
-            model.arrivalText(delayArr + " mins <br><br>Late");
+            model.arrivalText(getFormattedDelay(delayArr) + "<br><br>Late");
             model.runningTextCss("red");
         } else if (delayArr < 1) {
-            model.arrivalText(Math.abs(delayArr) + " mins <br><br>Early");
+            model.arrivalText(getFormattedDelay(Math.abs(delayArr)) + "<br><br>Early");
             model.runningTextCss("orange");
         }
+    }
+
+    function getFormattedDelay(delay) {
+        var hours = Math.floor(delay / 60);
+        var minutes = delay % 60;
+        return hours + " hrs " + minutes + " mins";
     }
 
     function getPNRStatus(m) {
@@ -153,8 +159,6 @@ $(document).ready(function() {
                 var rake = runningData.rakes[0];
                 setRakeBasedData(rake, model, 0);
                 model.runningStatusLoaded(true)
-
-                
             },
             function() {
                 alert("Train number incorrect or Server too busy. Please try after some time.");
@@ -194,23 +198,31 @@ $(document).ready(function() {
 
         model.preStation(preStation)
 
-
         model.currentLocation((model.nextStation().distance - model.preStation().distance) + " Kms from " + model.nextStation().stnCode);
 
-        model.currentStationStatus("Not yet departed from " + model.currentStation().stnCode);
+        var distanceOffset =  model.currentStation().distance/(rake.stations[rake.stations.length-1].distance);
+        model.currentLocation(( model.nextStation().distance - model.preStation().distance) + " Kms from " + model.nextStation().stnCode);
+
+        model.currentStationStatus("Departed from " + runningData.from)
         if (model.currentStation().stnCode == model.preStation().stnCode) {
             model.currentPosition("0%")
-        } else if (model.currentStation().stnCode == model.nextStation().stnCode) {
+            model.currentStationStatus("Not yet departed from " + runningData.from);
+        }
+        else if (model.currentStation().stnCode == model.nextStation().stnCode) {
             model.currentPosition("99%")
             model.currentLocation("");
-            model.currentStationStatus("Arrived at " + model.currentStation().stnCode)
-        } else if (model.currentStation().dep) {
-            model.currentPosition("75%");
-            model.currentStationStatus("Departed from " + model.currentStation().stnCode)
-        } else if (model.currentStation().arr) {
+        }
+        else if (distanceOffset<0.25) {
+            model.currentPosition("20%");
+        }
+        else if (distanceOffset>=0.25 && distanceOffset<0.48){
+            model.currentPosition("35%")
+        }else if (distanceOffset>=0.48 && distanceOffset<0.60){
             model.currentPosition("50%")
-        } else {
-            model.currentPosition("25%")
+        }else if (distanceOffset>=0.60 && distanceOffset<0.75){
+            model.currentPosition("65%")
+        }else if (distanceOffset>=0.75){
+            model.currentPosition("85%")
         }
 
         setArrivalText(model);
