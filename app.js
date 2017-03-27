@@ -14,7 +14,7 @@ var index = require('./routes/index');
 var app = express();
 var cache = apicache.middleware;
  
-//app.use(cache('10 minutes'));
+app.use(cache('10 minutes'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

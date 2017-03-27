@@ -2,10 +2,11 @@ $(document).ready(function() {
     $('#fullpage').fullpage({
         slideSelector: '.fullslide',
         verticalCentered: false,
-        scrollOverflow: false,
+        scrollOverflow: true,
+        scrollBar: false
         //responsive: 1024 
     });
-    $.fn.fullpage.setResponsive(true);
+   // $.fn.fullpage.setResponsive(true);
 
     function viewModel() {
         var runningData = null;
@@ -167,6 +168,7 @@ $(document).ready(function() {
     }
 
     function setRakeBasedData(rake, model, index) {
+        $("#trainNumber").blur();
         var toStation = runningData.to;
         var isFound = false;
         var preStation = rake.stations[0];
@@ -174,6 +176,7 @@ $(document).ready(function() {
             $(this).removeClass("selected");
         })
         $(".btn-group-sm .btn:nth(" + index + ")").addClass("selected");
+        $(".btn-group-sm .btn:nth(" + index + ")").focus();
 
         $.each(rake.stations, function(index, st) {
             if (isFound && st.stoppingStn) {
@@ -198,7 +201,7 @@ $(document).ready(function() {
 
         model.preStation(preStation)
 
-        model.currentLocation((model.nextStation().distance - model.preStation().distance) + " Kms from " + model.nextStation().stnCode);
+        model.currentLocation((model.nextStation().distance - model.currentStation().distance) + " Kms from " + model.nextStation().stnCode);
 
         var distanceOffset =  model.currentStation().distance/(rake.stations[rake.stations.length-1].distance);
         model.currentLocation(( model.nextStation().distance - model.preStation().distance) + " Kms from " + model.nextStation().stnCode);
@@ -226,6 +229,12 @@ $(document).ready(function() {
         }
 
         setArrivalText(model);
+        setTimeout(function(){
+            $.fn.fullpage.reBuild();
+            $(window).resize();
+        }, 100)
+            
+        
     }
 
     function getCancelledTrains(m) {
