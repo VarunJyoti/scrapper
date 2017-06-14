@@ -179,7 +179,7 @@ $(document).ready(function() {
         $(".btn-group-sm .btn:nth(" + index + ")").focus();
 
         $.each(rake.stations, function(index, st) {
-            if (isFound && st.stoppingStn) {
+             if (isFound && st.stoppingStn) {
                 // find next stopping station
                 model.nextStation(st);
                 return false;
@@ -203,8 +203,9 @@ $(document).ready(function() {
 
         model.currentLocation((model.nextStation().distance - model.currentStation().distance) + " Kms from " + model.nextStation().stnCode);
 
-        var distanceOffset =  model.currentStation().distance/(rake.stations[rake.stations.length-1].distance);
-        model.currentLocation(( model.nextStation().distance - model.preStation().distance) + " Kms from " + model.nextStation().stnCode);
+        var distanceCovered = (model.currentStation().distance - model.preStation().distance);
+
+        var distanceOffset =  distanceCovered/((model.nextStation().distance - model.preStation().distance));
 
         model.currentStationStatus("Departed from " + runningData.from)
         if (model.currentStation().stnCode == model.preStation().stnCode) {
