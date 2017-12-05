@@ -2,15 +2,24 @@ var express = require('express');
 var router = express.Router();
 
 var scrapper = require('./../scrapper');
-
+var stationsJson = require('../stations.json');
 /* GET users listing. */
 router.get('/scrapping/:trainNo', function (req, res, next) {
     var trainNo = req.params.trainNo || "";
     scrapper(trainNo,function(result){
-        res.json(result);
+		var resWithName = setStationName(result)
+        res.json(resWithName);
     });
 });
 
+function setStationName(res) {
+	res[0].rakes.forEach(function (rk) {
+		rk.stations.forEach(function (st) {
+			st.stnName = stationsJson[st.stnCode] || st.stnCode;
+		});
+	})
+	return res;
+}
 router.get('/scrapping/:trainNo/schedule', function (req, res, next) {
     var trainNo = req.params.trainNo || "";
     scrapper(trainNo,function(result){
