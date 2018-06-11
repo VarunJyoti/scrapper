@@ -1,0 +1,38 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/opt/bitnami/nodejs/bin/.node.bin',
+1 verbose cli   '/opt/bitnami/nodejs/bin/npm',
+1 verbose cli   'start' ]
+2 info using npm@5.4.2
+3 info using node@v7.5.0
+4 verbose run-script [ 'prestart', 'start', 'poststart' ]
+5 info lifecycle scrapper@0.0.0~prestart: scrapper@0.0.0
+6 info lifecycle scrapper@0.0.0~start: scrapper@0.0.0
+7 verbose lifecycle scrapper@0.0.0~start: unsafe-perm in lifecycle true
+8 verbose lifecycle scrapper@0.0.0~start: PATH: /opt/bitnami/nodejs/lib/node_modules/npm/bin/node-gyp-bin:/opt/bitnami/apps/scrapper/node_modules/.bin:/opt/bitnami/redis/bin:/opt/bitnami/python/bin:/opt/bitnami/nodejs/bin:/opt/bitnami/git/bin:/opt/bitnami/apache2/bin:/opt/bitnami/common/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+9 verbose lifecycle scrapper@0.0.0~start: CWD: /opt/bitnami/apps/scrapper
+10 silly lifecycle scrapper@0.0.0~start: Args: [ '-c', 'node ./bin/www' ]
+11 silly lifecycle scrapper@0.0.0~start: Returned: code: 1  signal: null
+12 info lifecycle scrapper@0.0.0~start: Failed to exec start script
+13 verbose stack Error: scrapper@0.0.0 start: `node ./bin/www`
+13 verbose stack Exit status 1
+13 verbose stack     at EventEmitter.<anonymous> (/opt/bitnami/nodejs/lib/node_modules/npm/node_modules/npm-lifecycle/index.js:280:16)
+13 verbose stack     at emitTwo (events.js:106:13)
+13 verbose stack     at EventEmitter.emit (events.js:192:7)
+13 verbose stack     at ChildProcess.<anonymous> (/opt/bitnami/nodejs/lib/node_modules/npm/node_modules/npm-lifecycle/lib/spawn.js:55:14)
+13 verbose stack     at emitTwo (events.js:106:13)
+13 verbose stack     at ChildProcess.emit (events.js:192:7)
+13 verbose stack     at maybeClose (internal/child_process.js:890:16)
+13 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+14 verbose pkgid scrapper@0.0.0
+15 verbose cwd /opt/bitnami/apps/scrapper
+16 verbose Linux 4.4.0-62-generic
+17 verbose argv "/opt/bitnami/nodejs/bin/.node.bin" "/opt/bitnami/nodejs/bin/npm" "start"
+18 verbose node v7.5.0
+19 verbose npm  v5.4.2
+20 error code ELIFECYCLE
+21 error errno 1
+22 error scrapper@0.0.0 start: `node ./bin/www`
+22 error Exit status 1
+23 error Failed at the scrapper@0.0.0 start script.
+23 error This is probably not a problem with npm. There is likely additional logging output above.
+24 verbose exit [ 1, true ]

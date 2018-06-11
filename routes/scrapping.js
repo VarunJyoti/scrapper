@@ -13,9 +13,17 @@ router.get('/scrapping/:trainNo', function (req, res, next) {
 });
 
 function setStationName(res) {
+    var stationName = "";
+    res[0].fromStnName = stationsJson[res[0].from];
 	res[0].rakes.forEach(function (rk) {
+        
 		rk.stations.forEach(function (st) {
-			st.stnName = stationsJson[st.stnCode] || st.stnCode;
+            console.log(st)
+            stationName = stationsJson[st.stnCode];
+            if(stationName.length >  15){
+                stationName = stationName.substring(0, 15)+"...";
+            } 
+			st.stnName = stationName || st.stnCode;
 		});
 	})
 	return res;

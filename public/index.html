@@ -166,13 +166,13 @@
                             </div>
                             <div class="row" style="margin-top:20px;padding-left: 10px; padding-right: 10px;">
                                 <div data-bind="if:runningStatusModel.preStation()" class="col-sm-4 bottom-div">
-                                    <span>Dept </span><span data-bind="text:runningStatusModel.preStation().stnCode"></span>
+                                    <span>Dept from: </span><span data-bind="text:runningStatusModel.preStation().stnName"></span>
                                     <br>
                                     <br>
                                     <span style="font-weight: bold" data-bind="text:runningStatusModel.preStation().actDep"></span>
                                 </div>
                                 <div data-bind="if:runningStatusModel.nextStation()" class="col-sm-4 bottom-div">
-                                    <span>ETA at </span><span data-bind="text:runningStatusModel.nextStation().stnCode"></span>
+                                    <span>ETA at: </span><span data-bind="text:runningStatusModel.nextStation().stnName"></span>
                                     <br>
                                     <br>
                                     <span style="font-weight: bold" data-bind="text:runningStatusModel.nextStation().actArr"></span>

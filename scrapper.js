@@ -9,11 +9,9 @@ function outer() {
     /* GET users listing. */
     function processForTrain(trainNo, resultCallback) {
         var url = 'http://enquiry.indianrail.gov.in/ntes/';
-        if (gotName && gotValue && gotName.length == 10 && gotValue.length == 10) {
-            SearchTrain();
-        } else {
-            getKeyValueSecret();
-        }
+        
+        SearchTrain();
+       
 
         function getKeyValueSecret() {
             request({
@@ -56,7 +54,8 @@ function outer() {
                             
                         }
                     });
-
+                    console.log("gotName", gotName);
+                    console.log("gotValue", gotValue);
                     processCookies(response.headers["set-cookie"]);
 
                     SearchTrain();
@@ -76,8 +75,8 @@ function outer() {
         }
 
         function SearchTrain() {
-            if (gotName && gotValue && gotName.length == 10 && gotValue.length == 10) {
-                var url1 = 'http://enquiry.indianrail.gov.in/ntes/SearchTrain?trainNo=' + trainNo + '&' + gotName + '=' + gotValue;
+            
+                var url1 = 'http://enquiry.indianrail.gov.in/ntes/SearchTrain?trainNo=' + trainNo;
                 
                 //var url2 = 'http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainData&trainNo=' + trainNo + '&' + gotName + '=' + gotValue;
 
@@ -95,16 +94,14 @@ function outer() {
                         getKeyValueSecret();
                     }
                 })
-            } else {
-                getKeyValueSecret();
-            }
+            
         }
 
         function getTrainData() {
-            if (gotName && gotValue && gotName.length == 10 && gotValue.length == 10) {
+            
                 
 
-                var url = 'http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainData&trainNo=' + trainNo + '&' + gotName + '=' + gotValue;
+                var url = 'http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainData&trainNo=' + trainNo;
                 
 
                 request({
@@ -125,7 +122,7 @@ function outer() {
                     }
 
                 })
-            }
+           
         }
     }
 

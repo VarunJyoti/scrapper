@@ -9,11 +9,9 @@ function outer2() {
     /* GET users listing. */
     function processForTrain(resultCallback) {
         var url = 'http://enquiry.indianrail.gov.in/ntes/';
-        if (gotName && gotValue && gotName.length == 10 && gotValue.length == 10) {
+        
             getTrainData();
-        } else {
-            getKeyValueSecret();
-        }
+        
 
         function getKeyValueSecret() {
             request({
@@ -78,8 +76,8 @@ function outer2() {
         
 
         function getTrainData() {
-            if (gotName && gotValue && gotName.length == 10 && gotValue.length == 10) {
-                var url = 'http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllDivertedTrains&' + gotName + '=' + gotValue;
+           
+                var url = 'http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllDivertedTrains';
                 
                 request({
                     uri: url,
@@ -96,7 +94,7 @@ function outer2() {
                     }
 
                 })
-            }
+           
         }
     }
 

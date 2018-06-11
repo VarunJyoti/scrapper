@@ -201,16 +201,16 @@ $(document).ready(function() {
 
         model.preStation(preStation)
 
-        model.currentLocation((model.nextStation().distance - model.currentStation().distance) + " Kms from " + model.nextStation().stnCode);
+        model.currentLocation((model.nextStation().distance - model.currentStation().distance) + " Kms from " + model.nextStation().stnName);
 
         var distanceCovered = (model.currentStation().distance - model.preStation().distance);
 
         var distanceOffset =  distanceCovered/((model.nextStation().distance - model.preStation().distance));
 
-        model.currentStationStatus("Departed from " + runningData.from)
+        model.currentStationStatus("Departed from " + runningData.fromStnName)
         if (model.currentStation().stnCode == model.preStation().stnCode) {
             model.currentPosition("0%")
-            model.currentStationStatus("Not yet departed from " + runningData.from);
+            model.currentStationStatus("Not yet departed from " + runningData.fromStnName);
         }
         else if (model.currentStation().stnCode == model.nextStation().stnCode) {
             model.currentPosition("99%")

@@ -11,6 +11,10 @@ var rescheduled = require('./routes/rescheduled');
 var apicache = require("apicache");
 var index = require('./routes/index');
 
+process.on('uncaughtException', function (error) {
+   console.log(error.stack);
+});
+
 var app = express();
 var cache = apicache.middleware;
  
