@@ -21,12 +21,16 @@
     <link rel="stylesheet" type="text/css" href="./stylesheets/bootstrap-3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="./stylesheets/style.css" />
     <link rel="stylesheet" type="text/css" href="./stylesheets/fullPage.css" />
+    <link rel="stylesheet" type="text/css"  href="./stylesheets/jquery-ui.min.css">
     <title>Trvlr</title>
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="./js/sammy.js"></script>
     <script type="text/javascript" src="js/overflow.js"></script>
     <script type="text/javascript" src="js/fullPage.js"></script>
     <script type="text/javascript" src="js/knockout-3.4.1.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/Reech_Stations.js"></script>
+    <script type="text/javascript" src="js/selectStation.js"></script>
     <script type="text/javascript" src="js/status_app.js"></script>
     <script type="text/javascript" src="./stylesheets/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -114,8 +118,11 @@
                     <div class="col-lg-2 col-lg-offset-4 col-sm-2 col-sm-offset-4 col-md-2 col-md-offset-4 col-xs-6 col-xs-offset-0 col-centered">
                         <form role="form">
                             <div class="input-group" data-bind="style: {'padding-top' : runningStatusModel.runningStatusLoaded()? 'inherit':'70%'}">
-                                <input style="font-size:20px;" type="text" class="text-center input-sm form-control" placeholder="Enter train number" maxlength="5" data-bind="value:runningStatusModel.runningTrainNo, valueUpdate:'keyup'" />
-                               <span class="input-group-btn">
+                                <div><input style="font-size:20px;" type="text" class="text-center input-sm form-control"
+                                       placeholder="Enter train number" maxlength="5"
+                                       data-bind="inputStation:{obj:'runningStatusModel',key:'runningTrainNo'}"/>
+                                </div>
+                                <span class="input-group-btn">
                                   <button class="btn btn-primary search-btn"
                                         data-bind="click:runningStatusModel.getRunningStatus, enable:runningStatusModel.enableGetRunningStatus">
                                         <i class="glyphicon glyphicon-search"></i>
@@ -327,7 +334,7 @@
                 </div>
         </div>
         </script>
-        <script type="text/html" id="Cancelled Trains">
+            <script type="text/html" id="Cancelled Trains">
             <div class="row">
                 <div class="col-sm-2"></div>
                 <div class="col-sm-8">

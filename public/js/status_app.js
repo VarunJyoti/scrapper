@@ -6,7 +6,6 @@ $(document).ready(function() {
         scrollBar: false
         //responsive: 1024 
     });
-   // $.fn.fullpage.setResponsive(true);
 
     function viewModel() {
         var runningData = null;
@@ -64,24 +63,7 @@ $(document).ready(function() {
             pnrModel: pnrModel()
         };
         model.views = ko.observableArray(["Running Status", "Diverted Trains", "Rescheduled Trains", "Cancelled Trains"]);
-
-        /* model.show_Contact = ko.computed(function () {
-             return model.currentView() === "Running Status" ? true : false;
-
-         });
-         model.show_Home = ko.computed(function () {
-             return model.currentView() === "PNR Status" ? true : false;
-         });
-         model.show_About = ko.computed(function () {
-             return model.currentView() === "Diverted Trains" ? true : false;
-         });
-         model.show_About = ko.computed(function () {
-             return model.currentView() === "Rescheduled Trains" ? true : false;
-         });
-         model.show_About = ko.computed(function () {
-             return model.currentView() === "Cancelled Trains" ? true : false;
-         });*/
-
+        
         ko.computed(function() {
             var cv = model.currentView();
             switch (cv) {

@@ -406,3 +406,18 @@ input {
 .navbar-nav>li:first-child {
     border:none;
 }
+
+.ui-autocomplete {
+    width: auto;
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.station-autocomplete {
+    max-height: 250px;}
+.station-autocomplete> li {
+        border-bottom: solid 1px #d4d4d4;
+}
+.station-autocomplete>li:last-child{
+     border-bottom: 0px;
+ }
