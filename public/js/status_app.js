@@ -1,11 +1,11 @@
 $(document).ready(function() {
-    $('#fullpage').fullpage({
+    /*$('#fullpage').fullpage({
         slideSelector: '.fullslide',
         verticalCentered: false,
         scrollOverflow: true,
         scrollBar: false
         //responsive: 1024 
-    });
+    });*/
 
     function viewModel() {
         var runningData = null;

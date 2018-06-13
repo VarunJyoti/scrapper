@@ -5,7 +5,10 @@ body {
     background-image: url("../images/bg2.png")
 }
 
-
+.section {
+    min-height: 700px;
+    max-height: 700px;
+}
 
 input {
     width: 300px !important;
